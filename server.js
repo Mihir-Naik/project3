@@ -32,6 +32,7 @@ app.get('/', (req,res) => {
     res.render('index')
 })
 
+// Server startup
 app.listen(port, (err) => {
     console.log(err || `Server running on port: ${port}`)
 })
