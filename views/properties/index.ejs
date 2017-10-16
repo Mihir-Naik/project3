@@ -1,0 +1,11 @@
+<h1>All Properties</h1>
+<ul>
+<% properties.forEach(function(p){ %>
+<li> 
+<a href="/properties/show/<%=p._id%>">
+  <%= p.aptnumber %> , <%= p.street %> , <%= p.city %>, <%= p.zipCode %> , <%= p.state %> 
+</a> 
+
+</li>
+<% }) %>
+</ul>
