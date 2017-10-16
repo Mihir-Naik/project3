@@ -1,9 +1,10 @@
-// Routes file /////// Remember to rename the file //////
+// /routes/users.js
 const
   express = require('express'),
   passport = require('passport'),
-  userRouter = express.Router()
-  
+  userRouter = express.Router(),
+  usersCtrl = require('../controllers/users.js')
+
 userRouter.route('/login')
   .get((req,res) => {
     res.render('login')
@@ -22,16 +23,18 @@ userRouter.route('/signup')
     failureRedirect: '/signup'
 }))
 
-userRouter.get('/profile', isLoggedIn, (req,res) => {
-  // show the user page if they are logged in
-  res.render('profile', {user: req.user})
-})
-
 userRouter.get('/logout', (req,res) => {
   // destroy the session, and redirect the user back to home page
   req.logout()
   res.redirect('/')
 })
+
+userRouter.route('/users/:id')
+  .get(isLoggedIn, usersCtrl.show)
+  .patch(usersCtrl.update)
+  .delete(usersCtrl.destroy)
+
+userRouter.get('/user/:id/edit', usersCtrl.edit)
 
 // Authorization check function for user trying to login
 function isLoggedIn(req, res, next){
