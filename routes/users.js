@@ -19,7 +19,7 @@ userRouter.route('/signup')
     res.render('signup')
   })
   .post(passport.authenticate('local-signup', {
-    successRedirect: '/profile',
+    successRedirect: '/dashboard',
     failureRedirect: '/signup'
 }))
 
@@ -29,13 +29,15 @@ userRouter.get('/logout', (req,res) => {
   res.redirect('/')
 })
 
+userRouter.get('/dashboard', isLoggedIn, usersCtrl.dashboard)
+
 userRouter.get('/profile', isLoggedIn, usersCtrl.show)
 
 userRouter.route('/users/:id')
   .patch(usersCtrl.update)
   .delete(usersCtrl.destroy)
 
-userRouter.get('/user/:id/edit', usersCtrl.edit)
+userRouter.get('/users/:id/edit', usersCtrl.edit)
 
 // Authorization check function for user trying to login
 function isLoggedIn(req, res, next){

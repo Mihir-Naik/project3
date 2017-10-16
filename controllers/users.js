@@ -2,21 +2,35 @@ const
   User = require('../models/User.js')
 
 module.exports = {
+  dashboard: (req, res) => {
+    res.render('users/dashboard')
+  },
+
   show: (req, res) => {
-    res.json("user show route")
+    res.render('users/profile', { user: req.user })
   },
+
   new: (req, res) => {
-    res.json("user new route")
+    res.render('users/new')
   },
+
   create: (req, res) => {
     res.json("user create route")
   },
+
   edit: (req, res) => {
-    res.json("user edit route")
+    User.findById(req.params.id, (err, user) => {
+      res.render('users/edit', { user })
+    })
   },
+
   update: (req, res) => {
-    res.json("user show route")
+    console.log(req.body)
+    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
+      res.redirect('/profile')
+    })
   },
+
   destroy: (req, res) => {
     res.json("user destroy route")
   },
