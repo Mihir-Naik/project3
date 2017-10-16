@@ -1,8 +1,14 @@
 const
   mongoose = require('mongoose'),
-  bcrypt = require('bcrypt-nodejs'),
+  addressSchema = new mongoose.Schema({
+    aptNumber: { type: String, required: true },
+    street: { type: String, required: true },
+    city: { type: String, required: true },
+    zipCode: { type: Number, required: true },
+    state: { type: String, required: true }
+  }),
   propertySchema = new mongoose.Schema({
-    address: { type: String, required: true },
+    address: addressSchema,
     rentalPrice: { type: Number, required: true },
     numBedrooms: { type: Number, required: true}, // validate format of email here
     numBathrooms: { type: Number, required: true},
