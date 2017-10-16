@@ -3,12 +3,13 @@ const
   bcrypt = require('bcrypt-nodejs'),
   userSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
-    lastName: String,
+    lastName: { type: String, required: true },
     email: { type: String, required: true}, // validate format of email here
     telephone: String,
     password: String,
-    userType: { type: String, required: true },
-    property: {type: mongoose.Schema.Types.ObjectId, ref: 'Property'}
+    admin: { type: Boolean},
+    ownedProperties: [{type: mongoose.Schema.Types.ObjectId, ref: 'Property'}],
+    residence: {type: mongoose.Schema.Types.ObjectId, ref: 'Property'}
   })
 
 userSchema.methods.generateHash = function(password) {
@@ -18,5 +19,11 @@ userSchema.methods.generateHash = function(password) {
 userSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password)
 }
+
+// Note: This is to set admin to false when creating a user
+// userSchema.pre('save', function(next) {
+//   if(this.isNew && this.admin) delete this.admin
+//   next()
+// })
 
 module.exports = mongoose.model('User', userSchema)
