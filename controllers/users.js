@@ -3,7 +3,10 @@ const
 
 module.exports = {
   show: (req, res) => {
-    res.json("user show route")
+    User.findById(req.params.id, (err, user) => {
+      res.json("user show route")
+      res.render('users/')
+    })
   },
   new: (req, res) => {
     res.json("user new route")
