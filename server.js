@@ -15,7 +15,8 @@ const
   passport = require('passport'),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
-  dotenv = require('dotenv').config()
+  dotenv = require('dotenv').config(),
+  methodOverride = require('method-override')
 
 // Environment PORT ///////// replace Project3 with project name once decided ⬇//////
 const
@@ -35,6 +36,7 @@ const store = new MongoDBStore({
 
 // Middleware
 app.use(express.static(`${__dirname}/public`))
+app.use(methodOverride('_method'))
 app.use(logger('dev'))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -54,11 +56,11 @@ app.use(passport.session())
 
 app.use((req, res, next) => {
 	app.locals.currentUser = req.user
-	app.locals.loggedIn = !!req.user
+  app.locals.loggedIn = !!req.user
+  app.locals._ = _
 
 	next()
 })
-
 
 // ejs Configuration here ////////////////
 app.set('view engine', 'ejs')

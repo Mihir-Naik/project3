@@ -7,9 +7,7 @@ module.exports = {
   },
 
   show: (req, res) => {
-    User.findById(req.params.id, (err, user) => {
-      res.render('users/profile')
-    })
+    res.render('users/profile', { user: req.user })
   },
 
   new: (req, res) => {
@@ -21,11 +19,16 @@ module.exports = {
   },
 
   edit: (req, res) => {
-    res.json("user edit route")
+    User.findById(req.params.id, (err, user) => {
+      res.render('users/edit', { user })
+    })
   },
 
   update: (req, res) => {
-    res.json("user show route")
+    console.log(req.body)
+    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
+      res.redirect('/profile')
+    })
   },
 
   destroy: (req, res) => {

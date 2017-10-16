@@ -1,2 +1,19 @@
-<!-- profile page -->
-<h1>This is the profile page</h1>
+<h1>This is the profile page for <%= user.firstName + " " + user.lastName  %></h1>
+
+<a href="/dashboard">Back to Dashboard</a>
+<br/>
+<br/>
+<h3>First Name</h3>
+<p><%= user.firstName %></p>
+
+<h3>Last Name</h3>
+<p><%= user.lastName %></p>
+
+<h3>Email</h3>
+<p><%= user.email %></p>
+
+<h3>Telephone</h3>
+<p><%= user.telephone %></p>
+
+<a href="/users/<%= user._id %>/edit">Edit Profile</a>
+

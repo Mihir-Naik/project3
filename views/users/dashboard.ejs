@@ -5,7 +5,7 @@
   <h2>I am a resident</h2>
 <% } else { %>
   <h2>I am a property owner</h2>
-  <% if(currentUser.ownedProperties.length > 0) { %>
+  <% if(!_.isEmpty(currentUser.ownedProperties.length)) { %>
     <div class="row">
       <% currentUser.ownedProperties.forEach(function(property) {%>
         <div class="col">

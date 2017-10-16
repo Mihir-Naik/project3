@@ -37,7 +37,7 @@ userRouter.route('/users/:id')
   .patch(usersCtrl.update)
   .delete(usersCtrl.destroy)
 
-userRouter.get('/user/:id/edit', usersCtrl.edit)
+userRouter.get('/users/:id/edit', usersCtrl.edit)
 
 // Authorization check function for user trying to login
 function isLoggedIn(req, res, next){
