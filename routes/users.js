@@ -7,7 +7,7 @@ const
 
 userRouter.route('/login')
   .get((req,res) => {
-    res.render('login')
+    res.render('login', {message: req.flash('loginMessage')})
   })
   .post(passport.authenticate('local-login', {
     successRedirect: '/profile',
