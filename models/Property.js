@@ -10,7 +10,7 @@ const
     numBedrooms: { type: Number, required: true}, // validate format of email here
     numBathrooms: { type: Number, required: true},
     sizeSquareFeet: { type: Number, required: true },
-    vacant: Boolean,
+    vacant: { type: Boolean, default: true },
     description: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     resident: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
