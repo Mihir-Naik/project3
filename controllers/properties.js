@@ -13,6 +13,7 @@ module.exports = {
 
   create: (req,res)=>{
     var newProperty = new Property(req.body)
+    newProperty.owner = req.user._id
     newProperty.save((err,property)=>{
       if(err) return console.log(err)
       res.redirect('/properties')
