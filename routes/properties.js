@@ -14,7 +14,7 @@ propertyRouter.route('/:id')
 propertyRouter.get('/:id/edit', propertiesCtrl.edit)
   
 //show all properties
-propertyRouter.get('/')
+propertyRouter.route('/')
   .post(propertiesCtrl.create)
   .get(propertiesCtrl.index)
 
