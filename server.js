@@ -12,7 +12,9 @@ const
   session = require('express-session'),
   MongoDBStore = require('connect-mongodb-session')(session),
   passport = require('passport'),
-  userRoutes = require('./routes/users.js')
+  passportConfig = require('./config/passport.js'),
+  userRoutes = require('./routes/users.js'),
+  dotenv = require('dotenv').config()
 
 // Environment PORT ///////// replace Project3 with project name once decided ⬇//////
 const
@@ -36,6 +38,17 @@ app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(flash())
+// session + passport //// Add secret in the .env file
+app.use(session({
+	secret: process.env.secret,
+	cookie:{maxAge : 60000000},
+	resave: true,
+	saveUninitialized: false,
+  	store: store
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 // ejs Configuration here ////////////////
