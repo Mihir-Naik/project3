@@ -48,6 +48,7 @@ app.get('/', (req,res) => {
 })
 
 app.use('/', userRoutes)
+app.use('/properties', propertyRoutes)
 
 // Server startup
 app.listen(port, (err) => {

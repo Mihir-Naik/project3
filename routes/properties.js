@@ -7,19 +7,22 @@ const
 
 
 
-// destroy the session, and redirect the user back to home page
+// show a specific prpoperty that should be destroyed
 
-propertyRouter.route('/properties/:id')
-.get(propertiesCtrl.show)
-.patch(usersCtrl.update)
-.delete(usersCtrl.destroy)
+propertyRouter.route('/:id')
+  .get(propertiesCtrl.show)
+  .patch(propertiesCtrl.update)
+  .delete(propertiesCtrl.destroy)
+  
+//show property you want to edit
+propertyRouter.get('/:id/edit', propertiesCtrl.edit)
+  
+//show all properties
+propertyRouter.get('/')
+  .post(propertiesCtrl.create)
+  .get(propertiesCtrl.index)
 
-userRouter.get('/user/:id/edit', usersCtrl.edit)
+//new, index and create
+propertyRouter.
 
-// Authorization check function for user trying to login
-function isLoggedIn(req, res, next){
-if (req.isAuthenticated()) return next()
-res.redirect('/')
-}
-
-module.exports = userRouter
+module.exports = propertyRouter
