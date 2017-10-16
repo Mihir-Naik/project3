@@ -12,9 +12,10 @@ const
   session = require('express-session'),
   MongoDBStore = require('connect-mongodb-session')(session),
   passport = require('passport'),
+  dotenv = require('dotenv').config(),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
-  dotenv = require('dotenv').config()
+  propertyRoutes = require('./routes/properties.js')
 
 // Environment PORT ///////// replace Project3 with project name once decided ⬇//////
 const
@@ -61,6 +62,7 @@ app.get('/', (req,res) => {
 })
 
 app.use('/', userRoutes)
+app.use('/properties', propertyRoutes)
 
 // Server startup
 app.listen(port, (err) => {
