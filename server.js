@@ -13,6 +13,7 @@ const
   MongoDBStore = require('connect-mongodb-session')(session),
   passport = require('passport'),
   userRoutes = require('./routes/users.js')
+  propertyRoutes = require ('./routes/properties.js')
 
 // Environment PORT ///////// replace Project3 with project name once decided ⬇//////
 const

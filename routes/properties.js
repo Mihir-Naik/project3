@@ -5,10 +5,6 @@ const
   propertyRouter = express.Router(),
   propertiesCtrl = require('../controllers/properties.js')
 
-
-
-// show a specific prpoperty that should be destroyed
-
 propertyRouter.route('/:id')
   .get(propertiesCtrl.show)
   .patch(propertiesCtrl.update)
@@ -22,7 +18,6 @@ propertyRouter.get('/')
   .post(propertiesCtrl.create)
   .get(propertiesCtrl.index)
 
-//new, index and create
-propertyRouter.
+propertyRouter.get('/new', propertiesCtrl.new)
 
 module.exports = propertyRouter
