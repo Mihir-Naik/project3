@@ -7,7 +7,7 @@ const
     email: { type: String, required: true}, // validate format of email here
     telephone: String,
     password: String,
-    admin: { type: Boolean},
+    admin: { type: Boolean, default: false},
     ownedProperties: [{type: mongoose.Schema.Types.ObjectId, ref: 'Property'}],
     residence: {type: mongoose.Schema.Types.ObjectId, ref: 'Property'}
   })

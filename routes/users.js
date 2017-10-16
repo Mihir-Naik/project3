@@ -29,8 +29,9 @@ userRouter.get('/logout', (req,res) => {
   res.redirect('/')
 })
 
+userRouter.get('/profile', isLoggedIn, usersCtrl.show)
+
 userRouter.route('/users/:id')
-  .get(isLoggedIn, usersCtrl.show)
   .patch(usersCtrl.update)
   .delete(usersCtrl.destroy)
 
