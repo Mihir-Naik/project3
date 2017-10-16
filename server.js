@@ -21,7 +21,7 @@ const
 
 // Establish Mongoose Connection
 mongoose.connect(mongoConnectionString, (err) => {
-    console.log(err || `Connected to MongoDB @ ${mongoConnectionString}`)
+  console.log(err || `Connected to MongoDB @ ${mongoConnectionString}`)
 })
 
 // ejs Configuration here ////////////////
@@ -32,6 +32,8 @@ app.use(ejsLayouts)
 app.get('/', (req,res) => {
   res.render('index')
 })
+
+app.use('/users', userRoutes)
 
 // Server startup
 app.listen(port, (err) => {
