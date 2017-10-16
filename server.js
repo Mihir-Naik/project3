@@ -24,6 +24,20 @@ mongoose.connect(mongoConnectionString, (err) => {
   console.log(err || `Connected to MongoDB @ ${mongoConnectionString}`)
 })
 
+// Store sessions
+const store = new MongoDBStore({
+  uri: mongoConnectionString,
+  collection: 'sessions'
+})
+
+// Middleware
+app.use(logger('dev'))
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+app.use(flash())
+
+
 // ejs Configuration here ////////////////
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
@@ -33,7 +47,7 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.use('/users', userRoutes)
+app.use('/', userRoutes)
 
 // Server startup
 app.listen(port, (err) => {
