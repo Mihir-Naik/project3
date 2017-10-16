@@ -19,7 +19,7 @@ userRouter.route('/signup')
     res.render('signup')
   })
   .post(passport.authenticate('local-signup', {
-    successRedirect: '/profile',
+    successRedirect: '/dashboard',
     failureRedirect: '/signup'
 }))
 
@@ -28,6 +28,8 @@ userRouter.get('/logout', (req,res) => {
   req.logout()
   res.redirect('/')
 })
+
+userRouter.get('/dashboard', isLoggedIn, usersCtrl.dashboard)
 
 userRouter.get('/profile', isLoggedIn, usersCtrl.show)
 

@@ -1,0 +1,21 @@
+
+<h1>Dashboard</h1>
+
+<% if(currentUser.residence) { %>
+  <h2>I am a resident</h2>
+<% } else { %>
+  <h2>I am a property owner</h2>
+  <% if(currentUser.ownedProperties.length > 0) { %>
+    <div class="row">
+      <% currentUser.ownedProperties.forEach(function(property) {%>
+        <div class="col">
+          <%= property.street %> -
+          <%= property.numBedrooms %> Bedrooms -
+          <%= property.numBathrooms %> Bathrooms
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <h3>There are currently no properties to display</h3>
+  <% } %>
+<% } %>
