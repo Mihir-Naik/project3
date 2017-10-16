@@ -1,6 +1,5 @@
 const
   mongoose = require('mongoose'),
-  bcrypt = require('bcrypt-nodejs'),
   InquirySchema = new mongoose.Schema({
     name: { type: String, required: true },
     telephone: { type: String, required: true },

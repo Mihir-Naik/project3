@@ -1,6 +1,5 @@
 const
   mongoose = require('mongoose'),
-  bcrypt = require('bcrypt-nodejs'),
   propertyImageSchema = new mongoose.Schema({
     url: { type: String, required: true },
     caption: String,
