@@ -5,6 +5,8 @@ const
   propertyRouter = express.Router(),
   propertiesCtrl = require('../controllers/properties.js')
 
+propertyRouter.get('/new', propertiesCtrl.new)
+
 propertyRouter.route('/:id')
   .get(propertiesCtrl.show)
   .patch(propertiesCtrl.update)
@@ -14,10 +16,9 @@ propertyRouter.route('/:id')
 propertyRouter.get('/:id/edit', propertiesCtrl.edit)
   
 //show all properties
-propertyRouter.get('/')
+propertyRouter.route('/')
   .post(propertiesCtrl.create)
   .get(propertiesCtrl.index)
 
-propertyRouter.get('/new', propertiesCtrl.new)
 
 module.exports = propertyRouter
