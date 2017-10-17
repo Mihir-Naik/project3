@@ -10,7 +10,7 @@ const
     admin: { type: Boolean, default: false},
     ownedProperties: [{type: mongoose.Schema.Types.ObjectId, ref: 'Property'}],
     residence: {type: mongoose.Schema.Types.ObjectId, ref: 'Property'}
-  })
+  },{ timestamps: true})
 
 userSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8))

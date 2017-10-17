@@ -7,6 +7,6 @@ const
     email: { type: String, required: true },
     description: { type: String, required: true },
     property: { type: mongoose.Schema.Types.ObjectId, ref: 'Property'}
-  })
+  },{ timestamps: true})
 
 module.exports = mongoose.model('Inquiry', InquirySchema)

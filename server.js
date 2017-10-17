@@ -19,10 +19,10 @@ const
   methodOverride = require('method-override')
   propertyRoutes = require('./routes/properties.js')
 
-// Environment PORT ///////// replace Project3 with project name once decided ⬇//////
+// Environment PORT 
 const
   port = process.env.PORT || 3000,
-  mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/project3'
+  mongoConnectionString = process.env.MONGODB_URI || 'mongodb://localhost/partment'
 
 // Establish Mongoose Connection
 mongoose.connect(mongoConnectionString, (err) => {
