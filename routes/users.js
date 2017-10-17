@@ -23,6 +23,10 @@ userRouter.route('/signup')
     failureRedirect: '/signup'
 }))
 
+userRouter.route('/reset_password')
+  .get(usersCtrl.resetPassword)
+  .patch(usersCtrl.updatePassword)
+
 userRouter.get('/logout', (req,res) => {
   // destroy the session, and redirect the user back to home page
   req.logout()

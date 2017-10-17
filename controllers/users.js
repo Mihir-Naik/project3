@@ -31,6 +31,20 @@ module.exports = {
     })
   },
 
+  resetPassword: (req, res) => {
+    res.render('users/resetPassword')
+  },
+
+  updatePassword: (req, res) => {
+    User.findById(req.user._id, (err, user) => {
+      user.password = user.generateHash(req.body.password)
+      user.save((err) => {
+        if(err) return console.log(err)
+        res.redirect('/profile')
+      })
+    })
+  },
+
   destroy: (req, res) => {
     res.json("user destroy route")
   },
