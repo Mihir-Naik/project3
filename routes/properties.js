@@ -20,5 +20,7 @@ propertyRouter.route('/')
   .post(propertiesCtrl.create)
   .get(propertiesCtrl.index)
 
+propertyRouter.get('/my_properties', propertiesCtrl.currentUserProperties)
+
 
 module.exports = propertyRouter

@@ -1,16 +1,27 @@
 <div class="property-info">
-  <%= property.rentalPrice %>
-  <%= property.aptNumber%>
-  <%= property.street%>
-  <%= property.city%> 
-  <%= property.zipCode %>
-  <%= property.state%> 
-  <%= property.rentalPrice %>
-  <%= property.numBedrooms %>
-  <%= property.numBathrooms %>
-  <%= property.sizeSquareFeet %>
-  <%= property.vacant %>
-  <%= property.description %>
+  <h1><%= `${property.aptNumber}, ${property.street}, ${property.city}, ${property.state} ${property.zipCode}` %></h1>
+  <dl>
+    <dt>Owner</dt>
+    <dd><%= property.owner.firstName + " " + property.owner.lastName  %></dd>
+
+    <dt>Rental Price</dt>
+    <dd><%= property.rentalPrice %></dd>
+
+    <dt>Bedrooms</dt>
+    <dd><%= property.numBedrooms %></dd>
+
+    <dt>Bathrooms</dt>
+    <dd><%= property.numBathrooms %></dd>
+
+    <dt>Size</dt>
+    <dd><%= property.sizeSquareFeet %> sq ft.</dd>
+
+    <dt>Vacant</dt>
+    <dd><%= property.vacant %></dd>
+    
+    <dt>Description</dt>
+    <dd><%= property.description %></dd>
+  </dl>
 </div>
 
 <a href='/properties/<%= property._id %>/edit'>Edit</a>
