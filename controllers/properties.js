@@ -5,14 +5,14 @@ const Property = require('../models/Property.js')
 //this is where we set our controller functions for the routes. this helps us consolidate our files
 module.exports = {
   index: (req,res) => {
-    Property.find({}).populate('owner').exec((err, properties) => {
+    Property.find({vacant: true}).populate('owner').exec((err, properties) => {
       if(err) return console.log(err)
       res.render('properties/index', {properties} )
     })
   },
 
   currentUserProperties: (req, res) => {
-    Property.find({id: req.user.id}).populate('owner').exec((err, properties) => {
+    Property.find({owner: req.user._id}).populate('owner').exec((err, properties) => {
       res.render('properties/currentUserProperties', { properties })
     })
   },
