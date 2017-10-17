@@ -38,9 +38,8 @@ module.exports = {
   },
   
   update: (req,res)=>{
-    
-    Property.findByIdAndUpdate(req.params.id, (err, updatedProperty)=>{
-      res.json(updatedProperty)
+    Property.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedProperty)=>{
+      res.redirect(`/properties/${updatedProperty._id}`)
     })
   },
   destroy: (req,res)=>{
