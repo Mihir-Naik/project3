@@ -1,7 +1,7 @@
 const
   mongoose = require('mongoose'),
   bcrypt = require('bcrypt-nodejs'),
-  mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/project3',
+  mongoConnectionString = process.env.MONGODB_URI || 'mongodb://localhost/parmint',
   User = require('./models/User.js'),
   Property = require('./models/Property.js')
   
