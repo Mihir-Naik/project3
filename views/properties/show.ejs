@@ -27,9 +27,9 @@
 <a href='/properties/<%= property._id %>/edit'>Edit</a>
 <a id="delete" href='/properties/<%= property._id %>?_method=DELETE'>Delete</a>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Apply</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal" data-whatever="@mdo">Apply</button>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -42,23 +42,23 @@
         <form>
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">First Name:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input name="firstName" type="text" class="form-control" id="recipient-name">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Last Name:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input name="lastName" type="text" class="form-control" id="recipient-name">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Telephone:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input name="telephone" type="text" class="form-control" id="recipient-name">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Email:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input name="email" type="text" class="form-control" id="recipient-name">
           </div>
           <div class="form-group">
-            <label for="message-text" class="form-control-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="message-text" class="form-control-label">Description:</label>
+            <textarea name="description" class="form-control" id="message-text"></textarea>
           </div>
         </form>
       </div>
@@ -75,6 +75,10 @@
     if(!confirm("Are you sure you want to delete this property?")){
       return false
     }
+  })
+
+  $('#submit').on('click', function(g){
+
   })
 
   
