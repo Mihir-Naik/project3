@@ -13,6 +13,7 @@ module.exports = {
 
   create: (req,res)=>{
     var newProperty = new Property(req.body)
+    newProperty.owner = req.user._id
     newProperty.save((err,property)=>{
       if(err) return console.log(err)
       res.redirect('/properties')
@@ -26,7 +27,7 @@ module.exports = {
   },
 
   new:(req,res)=>{
-      res.render('properties/new')
+    res.render('properties/new')
   },
 
   
@@ -37,15 +38,15 @@ module.exports = {
   },
   
   update: (req,res)=>{
-    Property.findByIdAndUpdate(req.params.id,(err, updatedProperty)=>{
-      res.json(updatedProperty)
+    Property.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedProperty)=>{
+      res.redirect(`/properties/${updatedProperty._id}`)
     })
   },
   destroy: (req,res)=>{
     Property.findByIdAndRemove(req.params.id,(err, vacantProperty)=>{
       if(err) return console.log(err)
-      res.json(vacantProperty)
-      res.json({success: true, message: "Vacant Property"})
+      res.redirect('/properties')
+      
     })
   }
 }

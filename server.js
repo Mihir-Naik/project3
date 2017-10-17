@@ -67,6 +67,16 @@ app.use((req, res, next) => {
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 
+// setting delete method for delete request
+app.use((req, res, next) => {
+  if(req.query._method == "DELETE"){
+    req.method = "DELETE"
+    req.url = req.path
+  }
+  next()
+})
+
+
 // Root Route
 app.get('/', (req,res) => {
   res.render('index')
