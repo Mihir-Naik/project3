@@ -14,4 +14,12 @@
 </div>
 
 <a href='/properties/<%= property._id %>/edit'>Edit</a>
-<a href='/properties/<%= property._id %>?_method=DELETE'>Delete</a>
+<a id="delete" href='/properties/<%= property._id %>?_method=DELETE'>Delete</a>
+
+<script>
+  $('#delete').on('click', function(e) {
+    if(!confirm("Are you sure you want to delete this property?")){
+      return false
+    }
+  })
+</script>
