@@ -38,7 +38,8 @@ module.exports = {
   },
   
   update: (req,res)=>{
-    Property.findByIdAndUpdate(req.params.id,(err, updatedProperty)=>{
+    
+    Property.findByIdAndUpdate(req.params.id, (err, updatedProperty)=>{
       res.json(updatedProperty)
     })
   },
