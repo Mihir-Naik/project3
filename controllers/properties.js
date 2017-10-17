@@ -45,8 +45,8 @@ module.exports = {
   destroy: (req,res)=>{
     Property.findByIdAndRemove(req.params.id,(err, vacantProperty)=>{
       if(err) return console.log(err)
-      res.json(vacantProperty)
-      res.json({success: true, message: "Vacant Property"})
+      res.redirect('/properties')
+      
     })
   }
 }

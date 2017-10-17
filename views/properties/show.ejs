@@ -12,4 +12,6 @@
   <%= property.vacant %>
   <%= property.description %>
 </div>
-<a href="">Edit</a>
+
+<a href='/properties/<%= property._id %>/edit'>Edit</a>
+<a href='/properties/<%= property._id %>?_method=DELETE'>Delete</a>
