@@ -17,4 +17,3 @@ const
   })
 
 module.exports = mongoose.model('Property', propertySchema)
-
