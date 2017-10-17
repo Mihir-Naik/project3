@@ -1,0 +1,12 @@
+<h1>My Properties</h1>
+
+<% if(!_.isEmpty(properties)) { %>
+  <ul>
+  <% properties.forEach(function(p) { %>
+    <li><%= p.aptNumber %>, <%= p.street %>, <%= p.city %>, <%= p.zipCode %>, <%= p.state %></li>
+  <% }) %>
+  </ul>
+<% } else { %>
+  <h3>You currently have no properties to display</h3>
+  <a href="/properties/new">Add new property</a>
+<% }%>

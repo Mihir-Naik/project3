@@ -6,6 +6,7 @@ const
   propertiesCtrl = require('../controllers/properties.js')
 
 propertyRouter.get('/new', propertiesCtrl.new)
+propertyRouter.get('/my_properties', propertiesCtrl.currentUserProperties)
 
 propertyRouter.route('/:id')
   .get(propertiesCtrl.show)
@@ -19,8 +20,5 @@ propertyRouter.get('/:id/edit', propertiesCtrl.edit)
 propertyRouter.route('/')
   .post(propertiesCtrl.create)
   .get(propertiesCtrl.index)
-
-propertyRouter.get('/my_properties', propertiesCtrl.currentUserProperties)
-
 
 module.exports = propertyRouter
