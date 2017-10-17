@@ -16,6 +16,9 @@
     </ul>
     <ul class="navbar-nav">
       <% if(loggedIn) { %>
+        <% if(!currentUser.residence) { %>
+          <a class="nav-link" href="/properties/new">Add New Property</a>
+        <% } %> 
         <a class="nav-link" href="/profile">My Profile</a>
         <a class="nav-link" href="/logout">Log Out</a>
       <% } else {%>
