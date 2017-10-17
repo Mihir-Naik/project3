@@ -1,7 +1,5 @@
-<h1>New Property</h1>
-
-<form class="property-form" method="post" action="/properties">
-    <div class="form-group">
+<form method="post" action="/properties/<%= property.id%>?_method=PATCH">
+  <div class="form-group">
       <label for="exampleFormControlInput1">Apartment Number</label>
       <input type="text" name="aptNumber" class="form-control" id="exampleFormControlInput1" placeholder="152 or W51">
     </div>
@@ -60,5 +58,5 @@
             Vacant
         </label>
       </div>
-    <button type="submit">Add Property</button>
+    <button type="submit">Update</button>
   </form>
