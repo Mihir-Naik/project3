@@ -57,7 +57,10 @@
   <a id="delete" href='/properties/<%= property._id %>?_method=DELETE'>Delete</a>
 <% } %>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal" data-whatever="@mdo">Apply</button>
+<!-- Owners cannot apply for their own property -->
+<% if(!loggedIn || (currentUser.id != property.owner.id)) { %>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">Apply</button>
+<% } %>
 
 <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
