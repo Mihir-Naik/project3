@@ -1,5 +1,9 @@
 const
   mongoose = require('mongoose'),
+  propertyImageSchema = new mongoose.Schema({
+    url: { type: String, required: true },
+    caption: String,
+  },{ timestamps: true }),
   propertySchema = new mongoose.Schema({
     aptNumber: { type: String, required: true },
     street: { type: String, required: true },
@@ -14,6 +18,7 @@ const
     description: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     resident: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    images: [ propertyImageSchema ],
     inquiries: [{type: mongoose.Schema.Types.ObjectId, ref: 'Inquiry'}]
   }, { timestamps: true})
 
