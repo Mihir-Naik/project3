@@ -83,7 +83,7 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.use('/users', userRoutes)
+app.use('/', userRoutes)
 app.use('/properties', propertyRoutes)
 // app.use('/inquiries', inquiryRouter)
 
