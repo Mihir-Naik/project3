@@ -5,6 +5,7 @@ const
 module.exports = {
   
   create: (req,res)=>{
+    Property.findById(req.params.id, (err, property) => {
       var newInquiry = new Inquiry()
       newInquiry.firstName = req.body.firstName
       newInquiry.lastName = req.body.lastName
@@ -14,8 +15,12 @@ module.exports = {
       newInquiry.property = req.params.id
       console.log(newInquiry)
       newInquiry.save((err, inquiry) => {
-        if(err) return err
-        res.redirect(`/properties/${req.params.id}`)
+        property.inquiries.push(inquiry)
+        property.save((err, property) => {
+          if(err) return err
+          res.redirect(`/properties/${req.params.id}`)
+        })
+      })
     })
   }
 }
