@@ -22,5 +22,12 @@ module.exports = {
         })
       })
     })
+  },
+  show: (req,res)=>{
+    Inquiry.findById(req.params.id).populate("property").exec((err, inquiry)=>{
+      res.render('inquiries/show', {inquiry: inquiry})
+
+    })
   }
 }
+
