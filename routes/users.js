@@ -7,7 +7,7 @@ const
 
 userRouter.route('/login')
   .get((req,res) => {
-    res.render('login', {message: req.flash('loginMessage')})
+    res.render('login')
   })
   .post(passport.authenticate('local-login', {
     successRedirect: '/profile',
@@ -29,6 +29,7 @@ userRouter.route('/reset_password')
 
 userRouter.get('/logout', (req,res) => {
   // destroy the session, and redirect the user back to home page
+  req.flash('success', 'You have successfully logged out')
   req.logout()
   res.redirect('/')
 })
