@@ -1,18 +1,17 @@
-
 <h1>Dashboard</h1>
 
 <% if(currentUser.residence) { %>
   <h2>I am a resident</h2>
 <% } else { %>
   <h2>I am a property owner</h2>
-  <% if(!_.isEmpty(currentUser.ownedProperties.length)) { %>
+  <% if(!_.isEmpty(properties)) { %>
     <div class="row">
-      <% currentUser.ownedProperties.forEach(function(property) {%>
-        <div class="col">
-          <%= property.street %> -
-          <%= property.numBedrooms %> Bedrooms -
-          <%= property.numBathrooms %> Bathrooms
-        </div>
+      <% properties.forEach(function(property) {%>
+        <a href="/properties/<%= property._id %>">
+          <div class="col">
+            <p><%= property.street %> - <%= property.numBedrooms %> Bedrooms - <%= property.numBathrooms %> Bathrooms <%= property.vacant? '(Vacant)' : '' %></p>
+          </div>
+        </a>
       <% }) %>
     </div>
   <% } else { %>

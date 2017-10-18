@@ -1,9 +1,12 @@
 const
-  User = require('../models/User.js')
+  User = require('../models/User.js'),
+  Property = require('../models/Property.js')
 
 module.exports = {
   dashboard: (req, res) => {
-    res.render('users/dashboard')
+    Property.find({owner: req.user._id}).exec((req, properties) => {
+      res.render('users/dashboard', { properties })
+    })
   },
 
   show: (req, res) => {
