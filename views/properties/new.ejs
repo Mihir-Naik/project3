@@ -53,11 +53,14 @@
     <label for="description">Description</label>
     <textarea name="description" class="form-control" id="description" rows="3"></textarea>
   </div>
-  <div class="form-group">
+  <div class="form-group" id="imagesFormGroup">
     <label for="imageUrl-1">Image URL</label>
     <div class="row">
-      <div class="col-md-11">
-        <input type="text" name="imageUrl-1" class="form-control" id="imageUrl-1" placeholder="Insert Image URL here" style="margin-top: 10px">
+      <div class="col-md-6">
+        <input type="text" name="imageUrls[]" class="form-control" id="imageUrl-1" placeholder="Insert Image URL here" style="margin-top: 10px">
+      </div>
+      <div class="col-md-6">
+        <input type="text" name="imageCaptions[]" class="form-control" id="imageCaption-1" placeholder="Insert Image Caption" style="margin-top: 10px">
       </div>
     </div>
     <button type="button" class="btn btn-info" id="addImageButton" style="margin-top: 10px">Add Another Image URL +</button>
@@ -71,21 +74,31 @@
     .addClass('delete-image-url btn btn-danger')
     .css('margin-top', '10px')
     .html('X')
-  var $imageFieldTemplate = $('<input>')
+  var $imageUrlTemplate = $('<input>')
     .addClass('form-control')
+    .attr('name', 'imageUrl')
     .attr('placeholder', 'Insert Image URL here')
     .attr('type', 'text')
     .css('margin-top', '10px')
-  var $inputDiv = $('<div>').addClass('col-md-11').append($imageFieldTemplate)
+  var $imageCaptionTemplate = $('<input>')
+    .addClass('form-control')
+    .attr('name', 'imageCaption')
+    .attr('placeholder', 'Insert Image URL here')
+    .attr('type', 'text')
+    .css('margin-top', '10px')
+
+  var $imageUrlDiv = $('<div>').addClass('col-md-6').append($imageUrlTemplate)
+  var $imageCaptionDiv = $('<div>').addClass('col-md-5').append($imageCaptionTemplate)
   var $buttonDiv = $('<div>').addClass('col-md-1').append($deleteButton)
-  var $row = $('<div>').addClass('row').append($inputDiv, $buttonDiv)
+  var $row = $('<div>').addClass('row').append($imageUrlDiv, $imageCaptionDiv, $buttonDiv)
   
   $('#addImageButton').on('click', function(e) {
     e.preventDefault()
     e.stopPropagation()
     imageUrlCounter += 1
     var $cloneRow = $row.clone()
-    $cloneRow.find('input[type=text]').attr('id', 'imageUrl-' + imageUrlCounter)
+    $cloneRow.find('input[name=imageUrl]').attr('id', 'imageUrl-' + imageUrlCounter).attr('name', 'imageUrls[]')
+    $cloneRow.find('input[name=imageCaption]').attr('id', 'imageCaption-' + imageUrlCounter).attr('name', 'imageCaptions[]')
     $cloneRow.insertBefore('#addImageButton')
   })
 
@@ -94,5 +107,14 @@
     e.stopPropagation()
 
     $(this).closest('.row').remove()
+
+    // update all ids of input
+    imageUrlCounter -=1
+    $('#imagesFormGroup .row').each(function(index, row){
+      console.log(row)
+      $(row).find('div.col-md-6 input').attr('id', 'imageUrl-' + (index + 1))
+      $(row).find('div.col-md-5 input').attr('id', 'imageCaption-' + (index + 1))
+    })
+
   })
 </script>

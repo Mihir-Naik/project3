@@ -20,6 +20,15 @@ module.exports = {
   create: (req,res)=>{
     var newProperty = new Property(req.body)
     newProperty.owner = req.user._id
+    
+    req.body.imageUrls.forEach((url, index)=>{
+      var newImage = {
+        url: url,
+        caption: req.body.imageCaptions[index]
+      }
+      newProperty.images.push(newImage)
+    })
+
     newProperty.save((err, property) => {
       if(err) return console.log(err)
       var currentUser = req.user
