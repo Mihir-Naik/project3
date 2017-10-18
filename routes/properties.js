@@ -3,15 +3,15 @@ const
   express = require('express'),
   passport = require('passport'),
   propertyRouter = express.Router(),
-  propertiesCtrl = require('../controllers/properties.js')
-  inquiriesCtrl = require('../controllers/inquiries.js')
-  residentRoutes = require('./residents.js')
+  propertiesCtrl = require('../controllers/properties.js'),
+  residentRoutes = require('./residents.js'),
+  inquiryRoutes = require('./inquiries.js')
 
 propertyRouter.get('/new', propertiesCtrl.new)
 propertyRouter.get('/my_properties', propertiesCtrl.currentUserProperties)
 
 
-propertyRouter.post('/:id/inquiries', inquiriesCtrl.create)
+propertyRouter.use('/:id/inquiries', inquiryRoutes)
 
 propertyRouter.route('/:id')
   .get(propertiesCtrl.show)

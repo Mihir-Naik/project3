@@ -5,27 +5,28 @@
 <% } else { %>
   <h2>I am a property owner</h2>
   <% if(!_.isEmpty(properties)) { %>
-    <div class="row">
-      <% properties.forEach(function(property) {%>
+    <% properties.forEach(function(property) {%>
+      <hr />
+      <div>
         <a href="/properties/<%= property._id %>">
-          <div class="col">
+          <div class="">
             <p><%= property.street %> - <%= property.numBedrooms %> Bedrooms - <%= property.numBathrooms %> Bathrooms <%= property.vacant? '(Vacant)' : '' %></p>
           </div>
         </a>
+        <h3>Inquiries:</h3>
+        <ul>
+          <% property.inquiries.forEach(function(inquiry) { %>
+            <li><a href="/properties/<%= property.id%>/inquiries/<%= inquiry.id %>">Name: <%= inquiry.firstName %>, Email: <%= inquiry.email %></a> </li>
+          <% }) %>
+        </ul>
+        
+      </div>
       <% }) %>
-    </div>
   <% } else { %>
     <h3>There are currently no properties to display</h3>
     <a href="/properties/new">Add New Property</a>
   <% } %>
 <% } %>
 
-<div class="row">
-    <div class="col">
-        <%= property.street %> -
-        <%= property.numBedrooms %> Bedrooms -
-        <%= property.numBathrooms %> Bathrooms
-      </div>
-    <div class="col"></div>
-</div>
+
 
