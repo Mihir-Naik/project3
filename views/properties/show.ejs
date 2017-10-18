@@ -1,5 +1,5 @@
 <div class="property-info">
-  <h1><%= `${property.aptNumber}, ${property.street}, ${property.city}, ${property.state} ${property.zipCode}` %></h1>
+  <h1><%= property.aptNumber%></h1>
   <dl>
     <dt>Owner</dt>
     <dd><%= property.owner.firstName + " " + property.owner.lastName  %></dd>
@@ -24,7 +24,7 @@
   </dl>
 </div>
 
-<a href='/properties/<%= property._id %>/edit'>Edit</a>
+<a href='properties/<%= property._id %>/edit'>Edit</a>
 <a id="delete" href='/properties/<%= property._id %>?_method=DELETE'>Delete</a>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal" data-whatever="@mdo">Apply</button>
@@ -39,7 +39,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form url="properties/<%= property._id %>/inquiries">
+        <form action='/properties/<%=property._id%>/inquiries' method="post">
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">First Name:</label>
             <input name="firstName" type="text" class="form-control" id="recipient-name">
@@ -77,8 +77,4 @@
       return false
     }
   })
-
-  
-  
-  
 </script>

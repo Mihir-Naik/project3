@@ -85,7 +85,7 @@ app.get('/', (req,res) => {
 
 app.use('/users', userRoutes)
 app.use('/properties', propertyRoutes)
-app.use('/inquiries', inquiryRoutes)
+// app.use('/inquiries', inquiryRouter)
 
 // Server startup
 app.listen(port, (err) => {
