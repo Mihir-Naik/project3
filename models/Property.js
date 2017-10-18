@@ -14,7 +14,8 @@ const
     description: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     resident: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    propertyInquiries: [{type: mongoose.Schema.Types.ObjectId, ref: 'Inquiry'}]
+    propertyInquiries: [{type: mongoose.Schema.Types.ObjectId, ref: 'Inquiry'}],
+    invoices: [{type: mongoose.Schema.Types.ObjectId, ref: 'Invoice'}] // Invoice model referring to a property
   }, { timestamps: true})
 
 module.exports = mongoose.model('Property', propertySchema)

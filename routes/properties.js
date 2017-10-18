@@ -3,9 +3,10 @@ const
   express = require('express'),
   passport = require('passport'),
   propertyRouter = express.Router(),
-  propertiesCtrl = require('../controllers/properties.js')
-  inquiriesCtrl = require('../controllers/inquiries.js')
-  residentRoutes = require('./residents.js')
+  propertiesCtrl = require('../controllers/properties.js'),
+  inquiriesCtrl = require('../controllers/inquiries.js'),
+  residentRoutes = require('./residents.js'),
+  invoiceRoutes = require('./invoices.js') //Required Invoice router file
 
 propertyRouter.get('/new', propertiesCtrl.new)
 propertyRouter.get('/my_properties', propertiesCtrl.currentUserProperties)
@@ -27,5 +28,6 @@ propertyRouter.route('/')
   .get(propertiesCtrl.index)
 
 propertyRouter.use('/:propertyId/residents', residentRoutes)
+propertyRouter.use('/:propertyId/invoices', invoiceRoutes) // Directing to Invoice routes 
 
 module.exports = propertyRouter
