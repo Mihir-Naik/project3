@@ -9,7 +9,7 @@
       <% properties.forEach(function(property) {%>
         <a href="/properties/<%= property._id %>">
           <div class="col">
-            <p><%= property.street %> - <%= property.numBedrooms %> Bedrooms - <%= property.numBathrooms %> Bathrooms <%= property.vacant? '(Vacant)' : '' %></p>
+                <p><%= property.street %> - <%= property.numBedrooms %> Bedrooms - <%= property.numBathrooms %> Bathrooms <%= property.vacant? '(Vacant)' : '' %> Inquiries: <%= property.inquiries%></p>
           </div>
         </a>
       <% }) %>
@@ -20,12 +20,4 @@
   <% } %>
 <% } %>
 
-<div class="row">
-    <div class="col">
-        <%= property.street %> -
-        <%= property.numBedrooms %> Bedrooms -
-        <%= property.numBathrooms %> Bathrooms
-      </div>
-    <div class="col"></div>
-</div>
 
