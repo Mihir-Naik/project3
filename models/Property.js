@@ -18,7 +18,7 @@ const
     description: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     resident: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    images: [ propertyImageSchema ]
+    images: [ propertyImageSchema ],
   }, { timestamps: true})
 
 module.exports = mongoose.model('Property', propertySchema)
