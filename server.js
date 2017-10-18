@@ -18,6 +18,7 @@ const
   userRoutes = require('./routes/users.js'),
   methodOverride = require('method-override')
   propertyRoutes = require('./routes/properties.js')
+  inquiryRouter = require('./routes/inquiries.js')
 
 // Environment PORT 
 const
@@ -82,8 +83,9 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.use('/', userRoutes)
+app.use('/users', userRoutes)
 app.use('/properties', propertyRoutes)
+app.use('/inquiries', inquiryRoutes)
 
 // Server startup
 app.listen(port, (err) => {
