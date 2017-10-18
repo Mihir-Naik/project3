@@ -35,6 +35,7 @@ userRouter.get('/logout', (req,res) => {
 
 userRouter.get('/dashboard', isLoggedIn, usersCtrl.dashboard)
 
+
 userRouter.get('/profile', isLoggedIn, usersCtrl.show)
 
 userRouter.route('/users/:id')

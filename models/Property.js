@@ -13,7 +13,8 @@ const
     vacant: { type: Boolean, default: true },
     description: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    resident: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    resident: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    propertyInquiries: [{type: mongoose.Schema.Types.ObjectId, ref: 'Inquiry'}]
   }, { timestamps: true})
 
 module.exports = mongoose.model('Property', propertySchema)
