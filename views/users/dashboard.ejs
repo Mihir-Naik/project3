@@ -16,7 +16,7 @@
         <h3>Inquiries:</h3>
         <ul>
           <% property.inquiries.forEach(function(inquiry) { %>
-            <li><%= inquiry %></li>
+            <li><a href="/properties/<%= property.id%>/inquiries/<%= inquiry.id %>">Name: <%= inquiry.firstName %>, Email: <%= inquiry.email %></a> </li>
           <% }) %>
         </ul>
         
