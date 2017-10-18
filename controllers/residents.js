@@ -8,7 +8,7 @@ module.exports = {
   },
   create: (req, res) => {
     var newResident = new User(req.body)
-    console.log(req.params.propertyId)
+    newResident.password = newResident.generateHash(newResident.password)
     newResident.residence = req.params.propertyId
     newResident.save((err, resident) => {
       if(err) return console.log(err)

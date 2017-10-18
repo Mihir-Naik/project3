@@ -22,7 +22,12 @@ module.exports = {
     newProperty.owner = req.user._id
     newProperty.save((err, property) => {
       if(err) return console.log(err)
-      res.redirect('/properties')
+      var currentUser = req.user
+      currentUser.ownedProperties.push(property._id)
+      currentUser.save((err) => {
+        if(err) return console.log(err)
+        res.redirect('/properties')
+      })
     })
   },
 
