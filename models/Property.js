@@ -1,5 +1,9 @@
 const
   mongoose = require('mongoose'),
+  propertyImageSchema = new mongoose.Schema({
+    url: { type: String, required: true },
+    caption: String,
+  },{ timestamps: true }),
   propertySchema = new mongoose.Schema({
     aptNumber: { type: String, required: true },
     street: { type: String, required: true },
@@ -13,7 +17,8 @@ const
     vacant: { type: Boolean, default: true },
     description: String,
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    resident: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    resident: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    images: [ propertyImageSchema ]
   }, { timestamps: true})
 
 module.exports = mongoose.model('Property', propertySchema)

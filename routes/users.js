@@ -47,6 +47,7 @@ userRouter.get('/users/:id/edit', usersCtrl.edit)
 // Authorization check function for user trying to login
 function isLoggedIn(req, res, next){
   if (req.isAuthenticated()) return next()
+  req.flash('error', 'You must be logged in to view that page')
   res.redirect('/')
 }
 
