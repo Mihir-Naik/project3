@@ -3,7 +3,7 @@
 <% if(!_.isEmpty(properties)) { %>
   <ul>
   <% properties.forEach(function(p) { %>
-    <li><%= p.aptNumber %>, <%= p.street %>, <%= p.city %>, <%= p.zipCode %>, <%= p.state %></li>
+    <li><a href="/properties/<%= p._id %>"><%= p.aptNumber %>, <%= p.street %>, <%= p.city %>, <%= p.zipCode %>, <%= p.state %> <%= p.vacant? '(Vacant)' : '' %></a></li>
   <% }) %>
   </ul>
 <% } else { %>

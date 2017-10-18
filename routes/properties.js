@@ -5,7 +5,8 @@ const
   propertyRouter = express.Router(),
   propertiesCtrl = require('../controllers/properties.js')
   inquiriesCtrl = require('../controllers/inquiries.js')
-  
+  residentRoutes = require('./residents.js')
+
 propertyRouter.get('/new', propertiesCtrl.new)
 propertyRouter.get('/my_properties', propertiesCtrl.currentUserProperties)
 
@@ -24,5 +25,7 @@ propertyRouter.get('/:id/edit', propertiesCtrl.edit)
 propertyRouter.route('/')
   .post(propertiesCtrl.create)
   .get(propertiesCtrl.index)
+
+propertyRouter.use('/:propertyId/residents', residentRoutes)
 
 module.exports = propertyRouter
