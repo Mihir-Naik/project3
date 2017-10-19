@@ -1,6 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class=container>
-  <a class="navbar-brand" href="/">Partmint</a>
+<div class="container-fluid">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #413C58;">
+          
+  <a class="navbar-brand" href="/" style="color:white;">Partmint 🌿</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,34 +10,34 @@
     <ul class="navbar-nav mr-auto">
       <% if(loggedIn) { %>
       <li class="nav-item">
-        <a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/dashboard" style="color:white;">Dashboard <span class="sr-only">(current)</span></a>
       </li>
       <% } %>
       <li class="nav-item">
-        <a class="nav-link" href="/properties">All Properties</a>
+        <a class="nav-link" href="/properties" style="color:white;">All Properties</a>
       </li>
     </ul>
     <ul class="navbar-nav">
       <% if(loggedIn) { %>
         <% if(!currentUser.residence) { /* the current user is a property owner */ %>
-          <a class="nav-link" href="/properties/new">Add New Property</a>
-        <% } else {%>
+          <a class="nav-link" href="/properties/new" style="color:white;">Add New Property</a>
+          <% }else {%>
           <a href="/my_invoices" class="nav-link"> My Invoices </a>
         <%}%>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
             <%= currentUser.firstName + " " + currentUser.lastName %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="/profile">My Profile</a>
+            <a class="dropdown-item" href="/profile" >My Profile</a>
             <a class="dropdown-item" href="/logout">Log Out</a>
           </div>
         </li>
       <% } else {%>
-        <a class="nav-link" href="/login">Log In</a>
-        <a class="nav-link" href="/signup">Sign Up</a>
+        <a class="nav-link" href="/login" style="color:white;">Log In</a>
+        <a class="nav-link" href="/signup" style="color:white;">Sign Up</a>
       <% } %>
     </ul>
   </div>
-  </div>
 </nav>
+  </div>

@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="property-info col-md-6">
+<div class="row" style="margin-top:100px;">
+  <div class="property-info col-md-6" >
     <h1><%= `${property.aptNumber}, ${property.street}, ${property.city}, ${property.state} ${property.zipCode}` %></h1>
     <dl>
       <dt>Owner</dt>
@@ -68,7 +68,7 @@
 
 <!-- Owners cannot apply for their own property -->
 <% if(!loggedIn || (currentUser.id != property.owner.id)) { %>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">Apply</button>
+  <button type="button" class="btn " data-toggle="modal" data-target="#applyModal" style="background-color:#99ffbb;">Apply</button>
 <% } %>
 
 <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -104,7 +104,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+            <button type="submit" class="btn" id="submit" style="background-color: #99ffbb;">Submit</button>
           </div>
         </form>
       </div>
