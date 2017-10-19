@@ -1,13 +1,13 @@
 <div id="middle" class="col-sm-4 col-sm-offset-4">
 <h1>All Vacant Properties</h1>
 
-<ul>
+<article>
 <% properties.forEach(function(p){ %>
-  <li> 
-    <a href="/properties/<%=p._id%>">
+  <a href="/properties/<%=p._id%>"><section> 
+    
       <%= p.aptNumber %>, <%= p.street %>, <%= p.city %>, <%= p.zipCode %>, <%= p.state %> - Owner: <%= !!p.owner ? `${p.owner.firstName} ${p.owner.lastName}` : "None" %>
-    </a>
-  </li>
+    
+  </section></a>
 <% }) %>
-</ul>
+</article>
 </div>
