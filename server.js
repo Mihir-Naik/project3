@@ -19,6 +19,7 @@ const
   methodOverride = require('method-override'),
   propertyRoutes = require('./routes/properties.js'),
   inquiryRouter = require('./routes/inquiries.js'),
+  Invoice = require('./models/Invoice.js')
   stripe = require("stripe")(process.env.STRIPE_SK_TEST)
 
 // Environment PORT 
@@ -92,22 +93,30 @@ app.use('/properties', propertyRoutes)
 
 // STRIPE CHARGE
 app.post('/charge', (req,res) => {
+  console.log("################ This is the invoice ID ################", req.query.invoiceId)
   console.log("################ This is the request body ################", req.body)
-  var token = req.body.stripeToken;
-  var chargeAmount = req.body.chargeAmount;
-  var charge = stripe.charges.create({
-    amount: chargeAmount,
-    currency: "usd",
-    source: token
-  }, function (err, charge){
-    if(err && err.type === "StripeCardError"){
-      console.log("Your card was declined.")
-    }
-    console.log("################ This is the response body ################", charge)
-    console.log(req.user)
+  Invoice.findById(req.query.invoiceId).populate('property billFrom billTo').exec((err, invoice) => {
+    if (err) return console.log(err)
+    var token = req.body.stripeToken;
+    var chargeAmount = req.body.chargeAmount;
+    var charge = stripe.charges.create({
+      amount: chargeAmount,
+      currency: "usd",
+      source: token,
+      description: `${invoice.billTo.firstName} ${invoice.billTo.lastName}: ${invoice.property.aptNumber}, ${invoice.property.street}`
+    }, function (err, charge){
+      if(err){
+        req.flash('error', 'Ooops, something went wrong. Please try again !')
+        res.redirect(`/properties/${invoice.property._id}/invoices/${invoice._id}`)
+      }
+      console.log("################ This is the response body ################", charge)
+      invoice.paid = true
+      invoice.save((err) => {
+        req.flash('success', 'Payment successful !')
+        res.redirect(`/properties/${invoice.property._id}/invoices/${invoice._id}`)
+      })
+    })
   })
-  req.flash('success', 'Payment successful !')
-  res.redirect('/dashboard')
 })
 
 // Server startup
