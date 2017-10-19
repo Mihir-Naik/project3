@@ -18,7 +18,7 @@
   <h4>Description: <br><%= invoice.description%></h4>    
 </div>
 
-<% if (currentUser.ownedProperties[0]) { %>
+<% if(currentUser.id == invoice.billFrom.id) { %> <!-- if the current user is the person who issued the invoice -->
   <a href="/properties/<%=property._id%>/invoices/<%= invoice._id%>/edit">Edit this invoice</a>
 <% } else {%>
   <form action="/charge" method="post">
