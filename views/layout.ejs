@@ -136,7 +136,15 @@
     }
     
     
-
+    .navbar {
+      -webkit-box-shadow: 0 8px 6px -6px #999;
+      -moz-box-shadow: 0 8px 6px -6px #999;
+      box-shadow: 0 8px 6px -6px #999;
+      
+      overflow: hidden;
+      width:auto;
+      /* the rest of your styling */
+  }
     
 
      .navbar-brand{
@@ -145,10 +153,20 @@
       font-size: 30px;
 
      }
+
+     
+ .row{
+  
+  margin-top: 10px;
+   
+ }
+    
   </style>
 </head>
 <body>
+   
   <%- include partials/navbar.ejs %>
+  
   <div class="container">
     <%- include partials/flash.ejs %>
     <%- body %>
