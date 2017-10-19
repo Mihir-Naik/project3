@@ -3,10 +3,22 @@
 <% if(!_.isEmpty(properties)) { %>
   <ul>
   <% properties.forEach(function(p) { %>
-    <li><a href="/properties/<%= p._id %>"><%= p.aptNumber %>, <%= p.street %>, <%= p.city %>, <%= p.zipCode %>, <%= p.state %> <%= p.vacant? '(Vacant)' : '' %></a></li>
+    <li>
+      <a href="/properties/<%= p._id %>"><%= p.aptNumber %>, <%= p.street %>, <%= p.city %>, <%= p.zipCode %>, <%= p.state %> <%= p.vacant? '(Vacant)' : '' %></a>
+      <a href="/properties/<%= p._id %>/edit" class="btn btn-warning">Edit</a>
+      <a href="/properties/<%= p._id %>?_method=DELETE" class="btn btn-danger" id="delete">Delete</a>
+    </li>
   <% }) %>
   </ul>
 <% } else { %>
   <h3>You currently have no properties to display</h3>
   <a href="/properties/new">Add new property</a>
 <% }%>
+
+<script>
+  $('#delete').on('click', function(e) {
+    if(!confirm("Are you sure you want to delete this property?")){
+      return false
+    }
+  })
+</script>

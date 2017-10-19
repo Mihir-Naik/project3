@@ -60,6 +60,8 @@ app.use((req, res, next) => {
 	app.locals.currentUser = req.user
   app.locals.loggedIn = !!req.user
   app.locals._ = _
+  app.locals.success = req.flash('success')
+  app.locals.error = req.flash('error')
 
 	next()
 })

@@ -1,64 +1,120 @@
 <h1>New Property</h1>
 
 <form class="property-form" method="post" action="/properties">
-    <div class="form-group">
-      <label for="exampleFormControlInput1">Apartment Number</label>
-      <input type="text" name="aptNumber" class="form-control" id="exampleFormControlInput1" placeholder="152 or W51">
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Street Address</label>
-        <input type="text" name="street" class="form-control" id="exampleFormControlInput1" placeholder="1520 2nd street">
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">City</label>
-        <input type="text" name="city" class="form-control" id="exampleFormControlInput1" placeholder="Los Angeles">
-    </div>
-    <div class="form-group">
-          <label for="exampleFormControlInput1">Zip Code</label>
-          <input type="text" name="zipCode" class="form-control" id="exampleFormControlInput1" placeholder="90041">
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">State</label>
-        <input type="text" name="state" class="form-control" id="exampleFormControlInput1" placeholder="CA">
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Rent Price</label>
-        <input type="text" name="rentalPrice" class="form-control" id="exampleFormControlInput1" placeholder="6000">
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Number of Bathrooms</label>
-      <select name="numBedrooms" class="form-control" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Number of Bedrooms</label>
-        <select name="numBathrooms" class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+  <div class="form-group">
+    <label for="apartmentNumber">Apartment Number</label>
+    <input type="text" name="aptNumber" class="form-control" id="apartmentNumber" placeholder="152 or W51">
+  </div>
+  <div class="form-group">
+      <label for="street">Street Address</label>
+      <input type="text" name="street" class="form-control" id="street" placeholder="1520 2nd street">
+  </div>
+  <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" name="city" class="form-control" id="city" placeholder="Los Angeles">
+  </div>
+  <div class="form-group">
+        <label for="zipCode">Zip Code</label>
+        <input type="text" name="zipCode" class="form-control" id="zipCode" placeholder="90041">
+  </div>
+  <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" name="state" class="form-control" id="state" placeholder="CA">
+  </div>
+  <div class="form-group">
+      <label for="rentalPrice">Rent Price (per month)</label>
+      <input type="text" name="rentalPrice" class="form-control" id="rentalPrice" placeholder="6000">
+  </div>
+  <div class="form-group">
+    <label for="numBedrooms">Number of Bathrooms</label>
+    <select name="numBedrooms" class="form-control" id="numBedrooms">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="numBathrooms">Number of Bedrooms</label>
+    <select name="numBathrooms" class="form-control" id="numBathrooms">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="sizeSquareFeet">Size (Square Feet)</label>
+    <input type="text" name="sizeSquareFeet" class="form-control" id="sizeSquareFeet" placeholder="300">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+  </div>
+  <div class="form-group" id="imagesFormGroup">
+    <label for="imageUrl-1">Image URL</label>
+    <div class="row">
+      <div class="col-md-6">
+        <input type="text" name="imageUrls[]" class="form-control" id="imageUrl-1" placeholder="Insert Image URL here" style="margin-top: 10px">
       </div>
-      <div class="form-group">
-          <label for="exampleFormControlInput1">Square Feet</label>
-          <input type="text" name="sizeSquareFeet" class="form-control" id="exampleFormControlInput1" placeholder="300sq">
+      <div class="col-md-6">
+        <input type="text" name="imageCaptions[]" class="form-control" id="imageCaption-1" placeholder="Insert Image Caption" style="margin-top: 10px">
       </div>
-      
-    <div class="form-group">
-      <label for="exampleFormControlTextarea1">Description</label>
-      <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
-    <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" value="" checked>
-            Vacant
-        </label>
-      </div>
-    <button type="submit">Add Property</button>
-  </form>
+    <button type="button" class="btn btn-info" id="addImageButton" style="margin-top: 10px">Add Another Image URL +</button>
+  </div>
+  <button type="submit" class="btn btn-primary">Add Property</button>
+</form>
+
+<script>
+  var imageUrlCounter = 1
+  var $deleteButton = $('<button>')
+    .addClass('delete-image-url btn btn-danger')
+    .css('margin-top', '10px')
+    .html('X')
+  var $imageUrlTemplate = $('<input>')
+    .addClass('form-control')
+    .attr('name', 'imageUrl')
+    .attr('placeholder', 'Insert Image URL here')
+    .attr('type', 'text')
+    .css('margin-top', '10px')
+  var $imageCaptionTemplate = $('<input>')
+    .addClass('form-control')
+    .attr('name', 'imageCaption')
+    .attr('placeholder', 'Insert Image URL here')
+    .attr('type', 'text')
+    .css('margin-top', '10px')
+
+  var $imageUrlDiv = $('<div>').addClass('col-md-6').append($imageUrlTemplate)
+  var $imageCaptionDiv = $('<div>').addClass('col-md-5').append($imageCaptionTemplate)
+  var $buttonDiv = $('<div>').addClass('col-md-1').append($deleteButton)
+  var $row = $('<div>').addClass('row').append($imageUrlDiv, $imageCaptionDiv, $buttonDiv)
+  
+  $('#addImageButton').on('click', function(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    imageUrlCounter += 1
+    var $cloneRow = $row.clone()
+    $cloneRow.find('input[name=imageUrl]').attr('id', 'imageUrl-' + imageUrlCounter).attr('name', 'imageUrls[]')
+    $cloneRow.find('input[name=imageCaption]').attr('id', 'imageCaption-' + imageUrlCounter).attr('name', 'imageCaptions[]')
+    $cloneRow.insertBefore('#addImageButton')
+  })
+
+  $('form.property-form').on('click', '.delete-image-url', function(e) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    $(this).closest('.row').remove()
+
+    // update all ids of input
+    imageUrlCounter -=1
+    $('#imagesFormGroup .row').each(function(index, row){
+      console.log(row)
+      $(row).find('div.col-md-6 input').attr('id', 'imageUrl-' + (index + 1))
+      $(row).find('div.col-md-5 input').attr('id', 'imageCaption-' + (index + 1))
+    })
+
+  })
+</script>

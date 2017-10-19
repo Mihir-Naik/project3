@@ -4,7 +4,7 @@ const
 
 module.exports = {
   dashboard: (req, res) => {
-    Property.find({owner: req.user._id}).exec((req, properties) => {
+    Property.find({owner: req.user._id}).populate('inquiries').exec((req, properties) => {
       res.render('users/dashboard', { properties })
     })
   },

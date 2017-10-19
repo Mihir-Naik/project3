@@ -17,9 +17,18 @@ module.exports = {
     })
   },
 
-  create: (req,res)=>{
+  create: (req,res) => {
     var newProperty = new Property(req.body)
     newProperty.owner = req.user._id
+    
+    req.body.imageUrls.forEach((url, index)=>{
+      var newImage = {
+        url: url,
+        caption: req.body.imageCaptions[index]
+      }
+      newProperty.images.push(newImage)
+    })
+
     newProperty.save((err, property) => {
       if(err) return console.log(err)
       var currentUser = req.user
@@ -31,13 +40,13 @@ module.exports = {
     })
   },
 
-  show:(req,res)=>{
+  show: (req,res) => {
     Property.findById(req.params.id).populate('owner').exec((err, specificProperty) => {
       res.render('properties/show', { property: specificProperty })
     })
   },
 
-  new:(req,res)=>{
+  new: (req,res) => {
     res.render('properties/new')
   },
 
@@ -47,11 +56,26 @@ module.exports = {
     })
   },
   
-  update: (req,res)=>{
-    Property.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedProperty) => {
-      res.redirect(`/properties/${updatedProperty._id}`)
+  update: (req,res) => {
+    Property.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, property) => {
+      if(err) return console.log(err)
+      property.images = []
+      
+      req.body.imageUrls.forEach((url, index)=>{
+        var newImage = {
+          url: url,
+          caption: req.body.imageCaptions[index]
+        }
+        property.images.push(newImage)
+      })
+
+      property.save((err) => {
+        if(err) return console.log(err)
+        res.redirect(`/properties/${property._id}`)
+      })
     })
   },
+
   destroy: (req,res)=>{
     Property.findByIdAndRemove(req.params.id,(err, vacantProperty) => {
       if(err) return console.log(err)
