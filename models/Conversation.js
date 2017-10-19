@@ -8,6 +8,8 @@ const
   conversationSchema = new mongoose.Schema({
     propertyOwner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     propertyResident: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    ownerRead: { type: Boolean, default: false },
+    residentRead: { type: Boolean, default: false },
     messages: [messageSchema]
   }, { timestamps: true })
 

@@ -21,6 +21,14 @@ module.exports = {
         sender: req.body.sender,
         receiver: req.body.receiver
       }
+      
+      //set unread for owner or resident
+      if(newMessage.sender == conversation.propertyOwner){
+        conversation.residentRead = false
+      } else {
+        conversation.ownerRead = false
+      }
+
       conversation.messages.push(newMessage)
       conversation.save((err, conversation) => {
         console.log(conversation)
@@ -34,7 +42,16 @@ module.exports = {
   },
   getMessages: (req, res) => {
     Conversation.findById(req.params.id, (err, conversation) => {
-      res.json(conversation.messages)
+      if(err) return console.log(err)
+      if(req.user.id == conversation.propertyOwner){
+        conversation.ownerRead = true
+      } else {
+        conversation.residentRead = true
+      }
+
+      conversation.save((err) => {
+        res.json(conversation.messages)
+      })
     })
   }
 }

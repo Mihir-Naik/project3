@@ -20,7 +20,14 @@
           <td><%= resident.lastName %></td>
           <td><%= resident.email %></td>
           <td><a href="/properties/<%= resident.residence.id %>"><%= resident.residence.formattedAddress() %></a></td>
-          <td><a href="/conversations/<%= conversations[resident.id] %>">Link to Chat</a></td>
+          <td style="text-align: center;">
+            <a href="/conversations/<%= conversations[resident.id] %>" class="chat-icon">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </td>
         </tr>
       <% }) %>
     <% } else { %>
