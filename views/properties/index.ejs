@@ -1,13 +1,17 @@
-<div id="middle" class="col-sm-4 col-sm-offset-4">
 <h1>All Vacant Properties</h1>
+<div id="middle" class="masonry">
 
-<article>
+
+<div class="item">
 <% properties.forEach(function(p){ %>
-  <a href="/properties/<%=p._id%>"><section> 
-    
-      <%= p.aptNumber %>, <%= p.street %>, <%= p.city %>, <%= p.zipCode %>, <%= p.state %> - Owner: <%= !!p.owner ? `${p.owner.firstName} ${p.owner.lastName}` : "None" %> <%= !!p.images.url ? `${imageUrlDiv}` : "None" %>
-    
-  </section></a>
+  <a href="/properties/<%=p._id%>">
+    <section> 
+      <% if(p.images.length > 0) { %>
+        <img id="propImg" src="<%= p.images[0].url %>">
+      <% } %>
+    </section>
+  </a>
 <% }) %>
-</article>
 </div>
+</div>
+
