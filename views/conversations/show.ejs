@@ -56,7 +56,7 @@
       var $newMessage = (message.sender == myId) ? $(myMessageTemplate).clone() : $(otherMessageTemplate).clone()
       
       $newMessage.find('p.content').text(message.content)
-      $newMessage.find('small.time').text(moment(message.createdAt).format('LT'))
+      $newMessage.find('small.time').text(moment(message.createdAt).format('lll'))
       $chatMessages.append($newMessage)
     })
     
