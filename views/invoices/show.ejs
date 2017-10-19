@@ -18,4 +18,21 @@
   <h4>Description: <br><%= invoice.description%></h4>    
 </div>
 
-<a href="/properties/<%=property._id%>/invoices/<%= invoice._id%>/edit">Edit this invoice</a>
+<% if (currentUser.ownedProperties[0]) { %>
+  <a href="/properties/<%=property._id%>/invoices/<%= invoice._id%>/edit">Edit this invoice</a>
+<% } else {%>
+  <form action="/charge" method="post">
+    <script
+      src = "https://checkout.stripe.com/checkout.js"
+      class = "stripe-button"
+      data-key = "<%= process.env.STRIPE_PK_TEST%>"
+      data-amount = "<%=invoice.amount * 100%>"
+      data-name = "<%=invoice.description%>"
+      data-description = "Monthly Rent"
+      data-locale = "auto"
+      data-currency = "usd"
+    >
+  </script>
+  <input type="hidden" name="chargeAmount" value="<%=invoice.amount * 100%>">
+  </form>
+<% } %>

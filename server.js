@@ -16,9 +16,10 @@ const
   dotenv = require('dotenv').config(),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
-  methodOverride = require('method-override')
-  propertyRoutes = require('./routes/properties.js')
-  inquiryRouter = require('./routes/inquiries.js')
+  methodOverride = require('method-override'),
+  propertyRoutes = require('./routes/properties.js'),
+  inquiryRouter = require('./routes/inquiries.js'),
+  stripe = require("stripe")(process.env.STRIPE_SK_TEST)
 
 // Environment PORT 
 const
@@ -88,6 +89,25 @@ app.get('/', (req,res) => {
 app.use('/', userRoutes)
 app.use('/properties', propertyRoutes)
 // app.use('/inquiries', inquiryRouter)
+
+// STRIPE CHARGE
+app.post('/charge', (req,res) => {
+  console.log("################ This is the request body ################", req.body)
+  var token = req.body.stripeToken;
+  var chargeAmount = req.body.chargeAmount;
+  var charge = stripe.charges.create({
+    amount: chargeAmount,
+    currency: "usd",
+    source: token
+  }, function (err, charge){
+    if(err && err.type === "StripeCardError"){
+      console.log("Your card was declined.")
+    }
+    console.log("################ This is the response body ################", charge)
+  })
+  req.flash('success', 'Payment successful !')
+  res.redirect('/dashboard')
+})
 
 // Server startup
 app.listen(port, (err) => {
