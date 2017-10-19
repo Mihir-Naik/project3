@@ -63,7 +63,9 @@ app.use((req, res, next) => {
   app.locals._ = _
   app.locals.success = req.flash('success')
   app.locals.error = req.flash('error')
-
+  if(!!req.user) {
+    app.locals.myConversationId = req.user.conversation
+  }
 	next()
 })
 

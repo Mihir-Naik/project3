@@ -21,9 +21,13 @@ module.exports = {
           var newConversation = new Conversation()
           newConversation.propertyOwner = req.user._id
           newConversation.propertyResident = resident._id
-          newConversation.save((err) => {
+          newConversation.save((err, conversation) => {
             if(err) return console.log(err)
-            res.redirect(`/properties/${property._id}`)
+            resident.conversation = conversation._id
+            resident.save((err) => {
+              if(err) return console.log(err)
+              res.redirect(`/properties/${property._id}`)
+            })
           })
         })
       })

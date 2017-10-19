@@ -18,6 +18,9 @@
     </ul>
     <ul class="navbar-nav">
       <% if(loggedIn) { %>
+        <% if(currentUser.residence) { %>
+          <a class="nav-link" href="/conversations/<%= myConversationId %>">Chat</a>
+        <% } %>
         <% if(!currentUser.residence) { /* the current user is a property owner */ %>
           <a class="nav-link" href="/my_residents">My Residents</a>
           <a class="nav-link" href="/properties/new">Add New Property</a>
