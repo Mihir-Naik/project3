@@ -5,7 +5,7 @@
 <% properties.forEach(function(p){ %>
   <a href="/properties/<%=p._id%>"><section> 
     
-      <%= p.aptNumber %>, <%= p.street %>, <%= p.city %>, <%= p.zipCode %>, <%= p.state %> - Owner: <%= !!p.owner ? `${p.owner.firstName} ${p.owner.lastName}` : "None" %>
+      <%= p.aptNumber %>, <%= p.street %>, <%= p.city %>, <%= p.zipCode %>, <%= p.state %> - Owner: <%= !!p.owner ? `${p.owner.firstName} ${p.owner.lastName}` : "None" %> <%= !!p.images.url ? `${imageUrlDiv}` : "None" %>
     
   </section></a>
 <% }) %>
