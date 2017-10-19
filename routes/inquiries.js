@@ -1,7 +1,7 @@
 const
   express = require('express'),
   passport = require('passport'),
-  inquiryRouter = express.Router(),
+  inquiryRouter = express.Router({mergeParams: true}),
   inquiriesCtrl = require('../controllers/inquiries.js')
 
 
