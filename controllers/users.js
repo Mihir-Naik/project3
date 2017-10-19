@@ -4,8 +4,14 @@ const
 
 module.exports = {
   dashboard: (req, res) => {
-    Property.find({owner: req.user._id}).populate('inquiries').exec((req, properties) => {
+    Property.find({owner: req.user._id}).populate('properties residence').exec((req, properties) => {
       res.render('users/dashboard', { properties })
+    })
+  },
+
+  myInvoices: (req, res) => {
+    Property.find({resident: req.user._id}).populate('resident owner invoices').exec((req, property)=> {
+      res.render('invoices/index', {property: property[0]})
     })
   },
 
