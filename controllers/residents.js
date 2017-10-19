@@ -1,6 +1,7 @@
 const
   User = require('../models/User.js'),
-  Property = require('../models/Property.js')
+  Property = require('../models/Property.js'),
+  Conversation = require('../models/Conversation.js')
 
 module.exports = {
   new: (req, res) => {
@@ -17,7 +18,13 @@ module.exports = {
         property.resident = resident._id
         property.vacant = false
         property.save((err) => {
-          res.redirect(`/properties/${property._id}`)
+          var newConversation = new Conversation()
+          newConversation.propertyOwner = req.user._id
+          newConversation.propertyResident = resident._id
+          newConversation.save((err) => {
+            if(err) return console.log(err)
+            res.redirect(`/properties/${property._id}`)
+          })
         })
       })
     })

@@ -16,9 +16,10 @@ const
   dotenv = require('dotenv').config(),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
-  methodOverride = require('method-override')
-  propertyRoutes = require('./routes/properties.js')
-  inquiryRouter = require('./routes/inquiries.js')
+  methodOverride = require('method-override'),
+  propertyRoutes = require('./routes/properties.js'),
+  inquiryRouter = require('./routes/inquiries.js'),
+  conversationRouter = require('./routes/conversations.js')
 
 // Environment PORT 
 const
@@ -88,6 +89,7 @@ app.get('/', (req,res) => {
 app.use('/', userRoutes)
 app.use('/properties', propertyRoutes)
 // app.use('/inquiries', inquiryRouter)
+app.use('/conversations', conversationRouter)
 
 // Server startup
 app.listen(port, (err) => {
