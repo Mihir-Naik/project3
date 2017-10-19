@@ -18,7 +18,7 @@
 
 <!-- my script -->
 <script>
-  <% if(currentUser.id == conversation.propertyOwner) { %>
+  <% if(currentUser.id == conversation.propertyOwner.id) { %>
     var myId = "<%= conversation.propertyOwner.id %>"
     var otherId = "<%= conversation.propertyResident.id %>"
   <% } else { %>
@@ -26,7 +26,6 @@
     var otherId = "<%= conversation.propertyOwner.id %>"
   <% } %>
 
-  console.log(myId)
   var $chatMessages = $('#chatMessages')
   var myMessageTemplate = 
     '<div class="row message-row my-message" style="text-align: right; margin-bottom: 10px;">' +
@@ -53,6 +52,7 @@
 
   var displayMessages = (messages) => {
     messages.forEach((message) => {
+      console.log((message.sender == myId))
       var $newMessage = (message.sender == myId) ? $(myMessageTemplate).clone() : $(otherMessageTemplate).clone()
       
       $newMessage.find('p.content').text(message.content)
@@ -78,7 +78,6 @@
 
 
   var fetchMessagesLoop = () => {
-    
     $.ajax({
       url: "/conversations/<%= conversation.id %>/messages",
       method: 'get'
