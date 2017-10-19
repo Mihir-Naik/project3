@@ -1,0 +1,21 @@
+<h1>Show page for an invoice</h1>
+
+<div>
+  <h2>Bill From:</h2>
+  <h4><%= invoice.billFrom.firstName %> <%= invoice.billFrom.lastName %></h4>
+</div>
+<div>
+  <h2>Bill To:</h2>
+  <h4><%= invoice.billTo.firstName %> <%= invoice.billTo.lastName %></h4>
+</div>
+<div>
+  <h4>Invoice for: <br><%= property.aptNumber%>, <%= property.street%>, <%= property.city%>, <%= property.state%>, <%= property.zipCode%></h4>
+</div>
+<div>
+  <h4>Amount Due ($): <br><%= invoice.amount%></h4>
+</div>
+<div>
+  <h4>Description: <br><%= invoice.description%></h4>    
+</div>
+
+<a href="/properties/<%=property._id%>/invoices/<%= invoice._id%>/edit">Edit this invoice</a>

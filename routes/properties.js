@@ -4,8 +4,10 @@ const
   passport = require('passport'),
   propertyRouter = express.Router(),
   propertiesCtrl = require('../controllers/properties.js'),
+  inquiriesCtrl = require('../controllers/inquiries.js'),
+  inquiryRoutes = require('./inquiries.js'),
   residentRoutes = require('./residents.js'),
-  inquiryRoutes = require('./inquiries.js')
+  invoiceRoutes = require('./invoices.js') //Required Invoice router file
 
 propertyRouter.get('/new', isLoggedIn, propertiesCtrl.new)
 propertyRouter.get('/my_properties', isLoggedIn, propertiesCtrl.currentUserProperties)
@@ -27,6 +29,7 @@ propertyRouter.route('/')
   .get(propertiesCtrl.index)
 
 propertyRouter.use('/:propertyId/residents', residentRoutes)
+propertyRouter.use('/:propertyId/invoices', invoiceRoutes) // Directing to Invoice routes 
 
 function isLoggedIn(req, res, next){
   if (req.isAuthenticated()) return next()
