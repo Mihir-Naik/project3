@@ -4,10 +4,10 @@
   </div>
   <ul></ul>
   <div>
-    <div class="msj-rta macro" style="margin:auto">                        
-      <div class="text text-r" style="background:whitesmoke !important">
+    <div id="myTextContainer" style="margin:auto">
+      <div id="myTextInnerContainer">
         <input class="mytext" placeholder="Type a message"/>
-      </div> 
+      </div>
     </div>
   </div>
 </div>
@@ -25,32 +25,41 @@
   console.log(myId)
   var $chatMessages = $('#chatMessages')
   var myMessageTemplate = 
-    '<div class="row message-row">' +
-      '<div class="col-md-10 col-md-offset-2">' +
-        '<p class="content"></p>' +
-        '<p class="time"></p>' +
+    '<div class="row message-row my-message" style="text-align: right; margin-bottom: 10px;">' +
+      '<div class="col message-column">' +
+        '<div class="message-box" style="text-align: right;">' +
+          '<p class="content"></p>' +
+          '<small class="time"></small>' +
+        '</div>' +
       '</div>' +
     '</div>'
 
 
   var otherMessageTemplate = 
-    '<div class="row message-row">' +
-      '<div class="col-md-10">' +
-        '<p class="content"></p>' +
-        '<p class="time"></p>' +
+    '<div class="row message-row other-message" style="text-align: left; margin-bottom: 10px;">' +
+      '<div class="col message-column">' +
+        '<div class="message-box" style="text-align: left;">' +
+          '<p class="content"></p>' +
+          '<small class="time"></small>' +
+        '</div>' +
       '</div>' +
     '</div>'
 
+  var currentMessages = {}
 
   var displayMessages = (messages) => {
     messages.forEach((message) => {
       var $newMessage = (message.sender == myId) ? $(myMessageTemplate).clone() : $(otherMessageTemplate).clone()
       
       $newMessage.find('p.content').text(message.content)
-      $newMessage.find('p.time').text(moment(message.createdAt).format('LT'))
+      $newMessage.find('small.time').text(moment(message.createdAt).format('LT'))
       $chatMessages.append($newMessage)
     })
+    
+    $chatMessages.scrollTop($chatMessages.prop("scrollHeight"));
   }
+
+
 
   var fetchMessages = () => {
     $chatMessages.html('')
@@ -58,9 +67,28 @@
       url: "/conversations/<%= conversation.id %>/messages",
       method: 'get'
     }).done((messages) => {
+      currentMessages = messages
       displayMessages(messages)
     })
   }
+
+
+  var fetchMessagesLoop = () => {
+    
+    $.ajax({
+      url: "/conversations/<%= conversation.id %>/messages",
+      method: 'get'
+    }).done((messages) => {
+      if(messages.length > currentMessages.length){
+        var newMessageCount = messages.length - currentMessages.length
+        var last = messages.length - 1
+        var newMessages = messages.slice(last - newMessageCount)
+        currentMessages = messages
+        displayMessages(newMessages)
+      }
+    })
+  }
+
 
   $(".mytext").on("keyup", function(e){
     if (e.which == 13){
@@ -85,15 +113,18 @@
         })
 
         $(this).val('');
+        
+        $chatMessages.scrollTop($chatMessages.prop("scrollHeight"));
+        
       }
     }
 
   });
 
   $(function(){
-    // setInterval(()=>{
-      fetchMessages()
-    // }, 1000)
+    fetchMessages()
+
+    setInterval(fetchMessagesLoop, 500)
   })
 </script>
 
