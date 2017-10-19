@@ -104,6 +104,7 @@ app.post('/charge', (req,res) => {
       console.log("Your card was declined.")
     }
     console.log("################ This is the response body ################", charge)
+    console.log(req.user)
   })
   req.flash('success', 'Payment successful !')
   res.redirect('/dashboard')

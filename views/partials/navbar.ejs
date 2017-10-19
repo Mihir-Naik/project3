@@ -20,9 +20,9 @@
       <% if(loggedIn) { %>
         <% if(!currentUser.residence) { /* the current user is a property owner */ %>
           <a class="nav-link" href="/properties/new">Add New Property</a>
-        <% } else { %>
+        <% } else {%>
           <a href="/my_invoices"> My Invoices </a>
-          <% } %>
+        <%}%>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= currentUser.firstName + " " + currentUser.lastName %>
