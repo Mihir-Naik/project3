@@ -41,7 +41,7 @@ module.exports = {
   },
 
   show: (req,res) => {
-    Property.findById(req.params.id).populate('owner').exec((err, specificProperty) => {
+    Property.findById(req.params.id).populate('owner resident').exec((err, specificProperty) => {
       res.render('properties/show', { property: specificProperty })
     })
   },

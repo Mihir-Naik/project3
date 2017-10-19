@@ -4,8 +4,18 @@ const
 
 module.exports = {
   dashboard: (req, res) => {
-    Property.find({owner: req.user._id}).populate('inquiries').exec((req, properties) => {
+    Property.find({owner: req.user._id}).populate('properties residence').exec((req, properties) => {
       res.render('users/dashboard', { properties })
+    })
+  },
+
+  myInvoices: (req, res) => {
+    Property.find({resident: req.user._id}).populate('resident owner invoices').exec((req, property)=> {
+      if (property[0].invoices[0]){
+        res.render('invoices/index', {property: property[0]})
+      } else {
+        res.render('/dashboard', req.flash('error', "There are no invoices to show at this time !"))
+      }
     })
   },
 
