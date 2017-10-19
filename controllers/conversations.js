@@ -1,10 +1,15 @@
 const
-  Conversation = require('../models/Conversation.js')
+  Conversation = require('../models/Conversation.js'),
+  Property = require('../models/Property.js')
 
 module.exports = {
   show: (req, res) => {
-    Conversation.findById(req.params.id, (err, conversation) => {
-      res.render('conversations/show', { conversation })
+    Conversation.findById(req.params.id).populate('propertyOwner propertyResident').exec((err, conversation) => {
+      var talkingTo = req.user.id == conversation.propertyOwner.id ? conversation.propertyResident : conversation.propertyOwner
+      Property.findOne({owner: conversation.propertyOwner.id, resident: conversation.propertyResident.id }, (err, property) => {
+        if(err) return console.log(err)
+        res.render('conversations/show', { conversation, talkingTo, property })
+      })
     })
   },
   createMessage: (req, res) => {
