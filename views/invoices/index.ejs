@@ -1,0 +1,10 @@
+<h1>All Invoices for Resident: <%= property.resident.firstName %> <%= property.resident.lastName %></h1>
+<ul>
+  <% property.invoices.forEach (function (i) { %>
+    <li>
+      <a href="/properties/<%= property._id%>/invoices/<%= i._id%>">
+        $<%= i.amount %>, <%= i.description%>
+      </a>
+    </li>
+  <% }) %>
+</ul>

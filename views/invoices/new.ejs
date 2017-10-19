@@ -1,1 +1,12 @@
 <h1>Add a new invoice</h1>
+<form action="/properties/<%=propertyId%>/invoices" method="post">
+  <div class="form-group">
+    <label>Amount Due:</label>
+    <input type="text" class="form-control" name="amount">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description</label>
+    <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-warning btn-lg">Add</button>
+</form>

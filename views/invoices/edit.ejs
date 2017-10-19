@@ -1,0 +1,12 @@
+<h1>Edit Invoice</h1>
+<form action="/properties/<%=propertyId%>/invoices/<%= invoice._id%>?_method=PATCH" method="post">
+  <div class="form-group">
+    <label>Amount Due:</label>
+    <input value="<%= invoice.amount%>"type="text" class="form-control" name="amount">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description</label>
+    <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"><%= invoice.description%></textarea>
+  </div>
+  <button type="submit" class="btn btn-warning btn-lg">Add</button>
+</form>
