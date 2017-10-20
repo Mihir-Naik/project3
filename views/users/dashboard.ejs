@@ -12,19 +12,26 @@
             <p><%= property.street %> - <%= property.numBedrooms %> Bedrooms - <%= property.numBathrooms %> Bathrooms <%= property.vacant? '(Vacant)' : '' %></p>
           </div>
         </a>
-        <h3>Inquiries:</h3>
-        <ul>
-          <% property.inquiries.forEach(function(inquiry) { %>
-            <li><a href="/properties/<%= property.id%>/inquiries/<%= inquiry.id %>">Name: <%= inquiry.firstName %>, Email: <%= inquiry.email %></a> </li>
+        <% if (!property.vacant) {%>
+          <h3>Invoices:</h3>
+          <ul>
+            <% property.invoices.forEach(function(invoice) { %>
+              <li><a href="/properties/<%= property.id%>/invoices/<%= invoice.id %>">Billed To: <%= property.resident.firstName %> <%= property.resident.lastName %> <br> Amount: $<%= invoice.amount %></a> </li>
             <% }) %>
           </ul>
-          <hr />
+        <% } else { %>
+          <h3>Inquiries:</h3>
+          <ul>
+            <% property.inquiries.forEach(function(inquiry) { %>
+              <li><a href="/properties/<%= property.id%>/inquiries/<%= inquiry.id %>">Name: <%= inquiry.firstName %>, Email: <%= inquiry.email %></a> </li>
+            <% }) %>
+          </ul>
+        <% } %>
+        <hr />
       </div>
-      <% }) %>
+    <% }) %>
   <% } else { %>
-    <h3>There are currently no properties to display</h3>
-    <a href="/properties/new">Add New Property</a>
+  <h3>There are currently no properties to display</h3>
+  <a href="/properties/new">Add New Property</a>
   <% } %>
 <% } %>
-
-
