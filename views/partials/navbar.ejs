@@ -1,6 +1,5 @@
 <div class="container-fluid">
   <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #413C58;">
-            
     <a class="navbar-brand" href="/" style="color:white;">Partmint 🌿</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -28,12 +27,12 @@
             </a>
           <% } %>
           <% if(!currentUser.residence) { /* the current user is a property owner */ %>
-            <a class="nav-link" href="/my_residents">My Residents</a>
+            <a class="nav-link" href="/my_residents" style="color:white;">My Residents</a>
             <a class="nav-link" href="/properties/new" style="color:white;">Add New Property</a>
-          <% }
+          <% } %>
           <% if(currentUser.residence) { %>
             <a href="/my_invoices" class="nav-link" style="color:white;"> My Invoices </a>
-          <%}%>
+          <% } %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
               <%= currentUser.firstName + " " + currentUser.lastName %>
