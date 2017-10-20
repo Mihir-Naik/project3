@@ -23,4 +23,8 @@ const
     invoices: [{type: mongoose.Schema.Types.ObjectId, ref: 'Invoice'}] // Invoice model referring to a property
   }, { timestamps: true})
 
+propertySchema.methods.formattedAddress = function() {
+  return `${this.aptNumber} ${this.street}, ${this.city}, ${this.state} ${this.zipCode}`
+}
+
 module.exports = mongoose.model('Property', propertySchema)
