@@ -1,0 +1,132 @@
+<div style="text-align: center;">
+  <h1><%= `${talkingTo.firstName} ${talkingTo.lastName}` %></h1>
+  <p>(<%= property.formattedAddress()%>)</p>
+</div>
+
+<div class="col-md-8 col-md-offset-4" id="chatBox">
+  <div id="chatMessages" class="container" style="overflow-y: scroll; height: 85%;" >
+  </div>
+  <ul></ul>
+  <div>
+    <div id="myTextContainer" style="margin:auto">
+      <div id="myTextInnerContainer">
+        <input class="mytext" placeholder="Type a message"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- my script -->
+<script>
+  <% if(currentUser.id == conversation.propertyOwner.id) { %>
+    var myId = "<%= conversation.propertyOwner.id %>"
+    var otherId = "<%= conversation.propertyResident.id %>"
+  <% } else { %>
+    var myId = "<%= conversation.propertyResident.id %>"
+    var otherId = "<%= conversation.propertyOwner.id %>"
+  <% } %>
+
+  var $chatMessages = $('#chatMessages')
+  var myMessageTemplate = 
+    '<div class="row message-row my-message" style="text-align: right; margin-bottom: 10px;">' +
+      '<div class="col message-column">' +
+        '<div class="message-box" style="text-align: right;">' +
+          '<p class="content"></p>' +
+          '<small class="time"></small>' +
+        '</div>' +
+      '</div>' +
+    '</div>'
+
+
+  var otherMessageTemplate = 
+    '<div class="row message-row other-message" style="text-align: left; margin-bottom: 10px;">' +
+      '<div class="col message-column">' +
+        '<div class="message-box" style="text-align: left;">' +
+          '<p class="content"></p>' +
+          '<small class="time"></small>' +
+        '</div>' +
+      '</div>' +
+    '</div>'
+
+  var currentMessages = {}
+
+  var displayMessages = (messages) => {
+    messages.forEach((message) => {
+      console.log((message.sender == myId))
+      var $newMessage = (message.sender == myId) ? $(myMessageTemplate).clone() : $(otherMessageTemplate).clone()
+      
+      $newMessage.find('p.content').text(message.content)
+      $newMessage.find('small.time').text(moment(message.createdAt).format('lll'))
+      $chatMessages.append($newMessage)
+    })
+    
+    $chatMessages.scrollTop($chatMessages.prop("scrollHeight"));
+  }
+
+
+
+  var fetchMessages = () => {
+    $chatMessages.html('')
+    $.ajax({
+      url: "/conversations/<%= conversation.id %>/messages",
+      method: 'get'
+    }).done((messages) => {
+      currentMessages = messages
+      displayMessages(messages)
+    })
+  }
+
+
+  var fetchMessagesLoop = () => {
+    $.ajax({
+      url: "/conversations/<%= conversation.id %>/messages",
+      method: 'get'
+    }).done((messages) => {
+      if(messages.length > currentMessages.length){
+        var newMessageCount = messages.length - currentMessages.length
+        var last = messages.length - 1
+        var newMessages = messages.slice(last - newMessageCount)
+        currentMessages = messages
+        displayMessages(newMessages)
+      }
+    })
+  }
+
+
+  $(".mytext").on("keyup", function(e){
+    if (e.which == 13){
+      var text = $(this).val();
+      if (text !== ""){
+        console.log(text)
+        //send ajax request to add message to conversation
+        var data = {
+          conversationId: "<%= conversation.id %>",
+          content: text,
+          sender: myId,
+          receiver: otherId
+        }
+
+        $.ajax({
+          url: "/conversations/<%= conversation.id %>/messages",
+          method: 'post',
+          data: JSON.stringify(data),
+          contentType: 'application/json'
+        }).done((data) => {
+          (data == 'success') ? fetchMessages() : alert('Something went wrong. Please try again.')
+        })
+
+        $(this).val('');
+        
+        $chatMessages.scrollTop($chatMessages.prop("scrollHeight"));
+        
+      }
+    }
+
+  });
+
+  $(function(){
+    fetchMessages()
+
+    setInterval(fetchMessagesLoop, 500)
+  })
+</script>

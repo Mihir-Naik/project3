@@ -1,0 +1,46 @@
+#chatBox {
+  margin: 0 auto;
+  height: 500px;
+  background: #ccc;
+  padding: 10px;
+}
+
+#chatBox .my-message .message-box {
+  display: inline-block;
+  background: #413C58;
+  color: white;
+  padding: 5px 20px;;
+}
+
+#chatBox .other-message .message-box {
+  display: inline-block;
+  color: #413C58;
+  background: white;
+  padding: 5px 20px;
+}
+
+#chatBox .message-box {
+  border-radius: 10px;
+}
+
+#chatBox #myTextContainer {
+  width: 90%;
+  height: 50px;
+  border-radius: 5px;
+  background: white;
+}
+
+#chatBox #myTextContainer {
+  width: 100%;
+  padding: 5px;
+}
+
+#chatBox #myTextContainer input.mytext {
+  width: 100%;
+  background: none;
+  border: none;
+}
+
+#chatBox #myTextContainer input.mytext:focus {
+  outline: none;
+}

@@ -1,6 +1,7 @@
 const
   User = require('../models/User.js'),
-  Property = require('../models/Property.js')
+  Property = require('../models/Property.js'),
+  Conversation = require('../models/Conversation.js')
 
 module.exports = {
   dashboard: (req, res) => {
@@ -9,6 +10,41 @@ module.exports = {
     })
   },
 
+  myResidents: (req, res) => {
+    User.findById(req.user.id)
+    .populate({
+      path: 'ownedProperties',
+      populate: {
+        path: 'resident',
+        populate: {
+          path: 'residence',
+          model: 'Property'
+        },
+        model: 'User'
+      }
+    })
+    .exec((err, user) => {
+      var promises = []
+      var myResidents = []
+      var conversations = {} // key = resident id, value = conversation
+
+      user.ownedProperties.forEach((property) => {
+        if(property.resident) {
+          let conversationPromise = Conversation.findOne({ propertyOwner: req.user.id, propertyResident: property.resident.id }).select('ownerRead').exec((err, conversation) => {
+            conversations[property.resident.id] = conversation
+            return true
+          })
+          promises.push(conversationPromise)
+          myResidents.push(property.resident)
+        }
+      })
+
+      Promise.all(promises).then(function(result){
+        res.render('users/myResidents', { myResidents, conversations })
+      })
+    })
+  },
+  
   myInvoices: (req, res) => {
     Property.find({resident: req.user._id}).populate('resident owner invoices').exec((req, property)=> {
       if (property[0].invoices[0]){
