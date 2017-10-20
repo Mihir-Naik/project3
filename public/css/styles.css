@@ -1,22 +1,19 @@
 .masonry {
-  margin: 1.5em 0;
+  margin: 2em 0;
   padding: 0;
   -moz-column-gap: 1.5em;
   -webkit-column-gap: 1.5em;
   column-gap: 1.5em;
   font-size: .85em;
   float: left;
+  width: 90%;
 }
 
-.item {
-  background: #fff;
-  padding: 1em;
-  margin: 0 0 1.5em;
-  width: 100%;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  float: left;
+#middle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;  
 }
 
 @media only screen and (min-width: 400px) {
@@ -66,7 +63,14 @@
   max-width:100%;
   max-height:100%;
   padding: 1em;
-  box-shadow: 2px 2px 4px 0 #413C58;
+  box-sizing: border-box;
+  border: 1px solid black;
+  box-shadow: 0px 2px 1px 0 #413C58;
+  margin: 8px;
+}
+
+#propImg:hover {
+  border-color: #ccc;
 }
 
 #newResident {
@@ -118,12 +122,7 @@ body{
   height: 400px;
 }
 
-#middle {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;  
-}
+
 
 .navbar {
   -webkit-box-shadow: 0 8px 6px -6px #999;
