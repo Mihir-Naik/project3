@@ -26,12 +26,12 @@ module.exports = {
     .exec((err, user) => {
       var promises = []
       var myResidents = []
-      var conversations = {} // key = resident id, value = conversation id
+      var conversations = {} // key = resident id, value = conversation
 
       user.ownedProperties.forEach((property) => {
         if(property.resident) {
-          let conversationPromise = Conversation.findOne({ propertyOwner: req.user.id, propertyResident: property.resident.id }, (err, conversation) => {
-            conversations[property.resident.id] = conversation.id
+          let conversationPromise = Conversation.findOne({ propertyOwner: req.user.id, propertyResident: property.resident.id }).select('ownerRead').exec((err, conversation) => {
+            conversations[property.resident.id] = conversation
             return true
           })
           promises.push(conversationPromise)

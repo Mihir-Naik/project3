@@ -19,7 +19,8 @@ const
   methodOverride = require('method-override'),
   propertyRoutes = require('./routes/properties.js'),
   inquiryRouter = require('./routes/inquiries.js'),
-  conversationRouter = require('./routes/conversations.js')
+  conversationRouter = require('./routes/conversations.js'),
+  Conversation = require('./models/Conversation.js')
 
 // Environment PORT 
 const
@@ -63,10 +64,16 @@ app.use((req, res, next) => {
   app.locals._ = _
   app.locals.success = req.flash('success')
   app.locals.error = req.flash('error')
-  if(!!req.user) {
+  if(!!req.user && req.user.conversation) {
     app.locals.myConversationId = req.user.conversation
+    Conversation.findById(req.user.conversation).select('-messages').exec((err, conversation) => {
+      app.locals.readResidentMessages = conversation.residentRead
+      next()
+    })
   }
-	next()
+  else {
+    next()
+  }
 })
 
 // ejs Configuration here ////////////////

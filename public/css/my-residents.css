@@ -5,3 +5,7 @@
 .chat-icon:hover {
   color: #0A830A;
 }
+
+.chat-icon:hover {
+  text-decoration: none;
+}

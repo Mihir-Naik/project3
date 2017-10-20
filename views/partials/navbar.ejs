@@ -19,7 +19,12 @@
     <ul class="navbar-nav">
       <% if(loggedIn) { %>
         <% if(currentUser.residence) { %>
-          <a class="nav-link" href="/conversations/<%= myConversationId %>">Chat</a>
+          <a class="nav-link" href="/conversations/<%= myConversationId %>">
+            Chat
+            <% if(!readResidentMessages) { %>
+              <span class="badge badge-danger">New</span>
+            <% } %>
+          </a>
         <% } %>
         <% if(!currentUser.residence) { /* the current user is a property owner */ %>
           <a class="nav-link" href="/my_residents">My Residents</a>
