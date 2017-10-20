@@ -12,7 +12,7 @@
 
 
       <dt>Rental Price</dt>
-      <dd><%= property.rentalPrice %></dd>
+      <dd>$<%= property.rentalPrice %></dd>
 
       <dt>Bedrooms</dt>
       <dd><%= property.numBedrooms %></dd>
@@ -60,10 +60,10 @@
     <a class="btn btn-primary" href="/properties/<%= property._id %>/invoices">Show invoices</a>
   <% } %>
   <% if(property.vacant) { %>
-    <a class="btn btn-partmint" href="/properties/<%= property._id %>/residents/new">Add a Resident</a>
+    <a class="btn btn-addmint" href="/properties/<%= property._id %>/residents/new">Add a Resident</a>
   <% } %>
   
-  <a class="btn btn-partmint"href="/properties/<%= property._id %>/edit">Edit Property</a>
+  <a class="btn btn-partmint" href="/properties/<%= property._id %>/edit">Edit Property</a>
 
   <a class="btn btn-deletemint" id="delete" href='/properties/<%= property._id %>?_method=DELETE'>Delete Property</a>
 <% } %>
