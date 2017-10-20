@@ -6,7 +6,6 @@
   column-gap: 1.5em;
   font-size: .85em;
   float: left;
-
 }
 
 .item {
@@ -133,9 +132,12 @@ body{
 }
 
 .navbar-brand{
-  color: white;
+  color: white !important;
   font-family: 'Righteous', cursive;
   font-size: 30px;
+}
+.nav-link {
+  color: white !important;
 }
 
 .row{
