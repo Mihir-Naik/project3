@@ -54,21 +54,23 @@
 
 <% if(loggedIn && currentUser.id == property.owner.id) {%>
   <% if(!property.vacant) { %>
-  <a href="/properties/<%= property._id %>/invoices/new">Add invoice</a>
+  <a class="btn btn-addmint" style="color:white;"href="/properties/<%= property._id %>/invoices/new">Add invoice</a>
   <% } %>
   <% if (property.invoices[0]) { %>
     <a href="/properties/<%= property._id %>/invoices">Show invoices</a>
   <% } %>
   <% if(property.vacant) { %>
-    <a href="/properties/<%= property._id %>/residents/new">Add a Resident</a>
+    <a class="btn btn-partmint" href="/properties/<%= property._id %>/residents/new">Add a Resident</a>
   <% } %>
-  <a href="/properties/<%= property._id %>/edit">Edit Property</a>
-  <a id="delete" href='/properties/<%= property._id %>?_method=DELETE'>Delete Property</a>
+  
+  <a class="btn btn-partmint"href="/properties/<%= property._id %>/edit">Edit Property</a>
+
+  <a class="btn btn-deletemint" id="delete" href='/properties/<%= property._id %>?_method=DELETE'>Delete Property</a>
 <% } %>
 
 <!-- Owners cannot apply for their own property -->
 <% if(!loggedIn || (currentUser.id != property.owner.id)) { %>
-  <button type="button" class="btn " data-toggle="modal" data-target="#applyModal" style="background-color:#99ffbb;">Apply</button>
+  <button type="button" class="btn btn-partmint" data-toggle="modal" data-target="#applyModal">Apply</button>
 <% } %>
 
 <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -104,7 +106,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn" id="submit" style="background-color: #99ffbb;">Submit</button>
+            <button type="submit" class="btn btn-partmint" id="submit" >Submit</button>
           </div>
         </form>
       </div>
