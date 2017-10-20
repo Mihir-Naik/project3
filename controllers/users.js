@@ -5,8 +5,10 @@ const
 
 module.exports = {
   dashboard: (req, res) => {
-    Property.find({owner: req.user._id}).populate('properties resident inquiries invoices').exec((req, properties) => {
-      res.render('users/dashboard', { properties })
+    Property.find({owner: req.user._id}).populate('properties resident inquiries invoices ').exec((err, properties) => {
+      User.findById(req.user._id).populate('residence').exec((err, user) => {
+        res.render('users/dashboard', { properties, user })
+      })
     })
   },
 

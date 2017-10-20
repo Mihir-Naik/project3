@@ -1,7 +1,24 @@
 <h1 style="margin-top:100px;">Dashboard</h1>
 
 <% if(currentUser.residence) { %>
-  <h2>I am a resident</h2>
+  <h3>My Home</h3>
+  <a href="/properties/<%= user.residence.id%>">
+    <% if(user.residence.images.length > 0) { %>
+      <img src="<%= user.residence.images[0].url%>"/><br />
+    <% } %>
+    <%= user.residence.formattedAddress() %>
+  </a>
+  <br />
+  <br />
+  <h3 style="display: inline">Chat with Owner</h3>
+
+  <a class="chat-icon" href="/conversations/<%= user.conversation %>">
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+    </span>
+  </a>
+  <hr />
 <% } else { %>
   <% if(!_.isEmpty(properties)) { %>
     <% properties.forEach(function(property) {%>
