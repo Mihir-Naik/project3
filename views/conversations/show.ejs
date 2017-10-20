@@ -52,7 +52,6 @@
 
   var displayMessages = (messages) => {
     messages.forEach((message) => {
-      console.log((message.sender == myId))
       var $newMessage = (message.sender == myId) ? $(myMessageTemplate).clone() : $(otherMessageTemplate).clone()
       
       $newMessage.find('p.content').text(message.content)
@@ -62,8 +61,6 @@
     
     $chatMessages.scrollTop($chatMessages.prop("scrollHeight"));
   }
-
-
 
   var fetchMessages = () => {
     $chatMessages.html('')
@@ -84,8 +81,8 @@
     }).done((messages) => {
       if(messages.length > currentMessages.length){
         var newMessageCount = messages.length - currentMessages.length
-        var last = messages.length - 1
-        var newMessages = messages.slice(last - newMessageCount)
+        // var last = messages.length - 1
+        var newMessages = messages.slice(messages.length - newMessageCount)
         currentMessages = messages
         displayMessages(newMessages)
       }
@@ -97,8 +94,6 @@
     if (e.which == 13){
       var text = $(this).val();
       if (text !== ""){
-        console.log(text)
-        //send ajax request to add message to conversation
         var data = {
           conversationId: "<%= conversation.id %>",
           content: text,
