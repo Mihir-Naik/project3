@@ -57,7 +57,7 @@
   <a class="btn btn-addmint" style="color:white;"href="/properties/<%= property._id %>/invoices/new">Add invoice</a>
   <% } %>
   <% if (property.invoices[0]) { %>
-    <a href="/properties/<%= property._id %>/invoices">Show invoices</a>
+    <a class="btn btn-primary" href="/properties/<%= property._id %>/invoices">Show invoices</a>
   <% } %>
   <% if(property.vacant) { %>
     <a class="btn btn-partmint" href="/properties/<%= property._id %>/residents/new">Add a Resident</a>

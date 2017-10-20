@@ -1,13 +1,13 @@
 <div id="middle" class="col-sm-4 col-sm-offset-4" style="margin-top:30px;">  
 <h1>Add a new invoice</h1>
-<form action="/properties/<%=propertyId%>/invoices" method="post">
+<form action="/properties/<%= property.id %>/invoices" method="post">
   <div class="form-group">
     <label>Amount Due:</label>
-    <input type="text" class="form-control" name="amount">
+    <input type="text" class="form-control" name="amount" placeholder="<%= property.rentalPrice %>">
   </div>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Description</label>
-    <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Insert description here"></textarea>
   </div>
   <button type="submit" class="btn btn-partmint btn-lg">Add</button>
 </form>

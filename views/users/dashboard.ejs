@@ -25,16 +25,23 @@
       <div>
         <a href="/properties/<%= property._id %>">
           <div class="">
+            <% if(property.images.length > 0) { %>
+              <img src="<%= property.images[0].url %>" style="height: 200px">
+            <% } %>
             <p><%= property.street %> - <%= property.numBedrooms %> Bedrooms - <%= property.numBathrooms %> Bathrooms <%= property.vacant? '(Vacant)' : '' %></p>
           </div>
         </a>
         <% if (!property.vacant) {%>
           <h3>Invoices:</h3>
-          <ul>
-            <% property.invoices.forEach(function(invoice) { %>
-              <li><a href="/properties/<%= property.id%>/invoices/<%= invoice.id %>">Billed To: <%= property.resident.firstName %> <%= property.resident.lastName %> <br> Amount: $<%= invoice.amount %></a> </li>
-            <% }) %>
-          </ul>
+          <% if(property.invoices.length > 0) { %>
+            <ul>
+              <% property.invoices.forEach(function(invoice) { %>
+                <li><a href="/properties/<%= property.id%>/invoices/<%= invoice.id %>">Billed To: <%= property.resident.firstName %> <%= property.resident.lastName %> <br> Amount: $<%= invoice.amount %></a> </li>
+              <% }) %>
+            </ul>
+          <% } else { %>
+            <p>There are no invoices to display</p>
+          <% } %>
         <% } else { %>
           <h3>Inquiries:</h3>
           <ul>

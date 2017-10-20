@@ -1,12 +1,22 @@
-<h1>All Invoices for Resident: <%= property.resident.firstName %> <%= property.resident.lastName %></h1>
-<ul>
+<h1 style="margin-top: 100px;">All Invoices for Resident: <%= property.resident.firstName %> <%= property.resident.lastName %></h1>
+
+<div class="row">
   <% property.invoices.forEach (function (i) { %>
-    <!-- <%// if (!i.paid) {%> -->
-      <li>
-        <a href="/properties/<%= property._id%>/invoices/<%= i._id%>">
-          $<%= i.amount %>, <%= i.description%>, Paid: <%= i.paid %>
-        </a>
-      </li>
-    <!-- <%//}%> -->
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">$<%= i.amount %> - <%= i.createdAt %></h3>
+          <p class="card-text">
+            <%= i.description %>
+            <% if(i.paid) { %>
+              <span class="badge badge-success">Paid</span>
+            <% } else { %>
+              <span class="badge badge-danger">Not Paid</span>
+            <% }  %>
+          </p>
+          <a href="/properties/<%= property._id%>/invoices/<%= i._id%>" class="btn btn-partmint">View Invoice</a>
+        </div>
+      </div>
+    </div>
   <% }) %>
-</ul>
+</div>

@@ -49,7 +49,7 @@ module.exports = {
   
   myInvoices: (req, res) => {
     Property.find({resident: req.user._id}).populate('resident owner invoices').exec((err, properties)=> {
-      if(properties.invoices){
+      if(properties[0].invoices){
         res.render('invoices/index', {property: properties[0]})
       } else {
         req.flash('error', "There are no invoices to show at this time !")
