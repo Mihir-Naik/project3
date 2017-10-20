@@ -1,17 +1,15 @@
 <h1 id="vacantProperties" style="margin-top:100px;">All Vacant Properties</h1>
 <div id="middle" class="masonry">
-
-
-<div class="item">
-<% properties.forEach(function(p){ %>
-  <a href="/properties/<%=p._id%>">
-    <section> 
-      <% if(p.images.length > 0) { %>
-        <img id="propImg" src="<%= p.images[0].url %>">
-      <% } %>
-    </section>
-  </a>
-<% }) %>
-</div>
+  <% properties.forEach(function(p){ %>
+    <div class="item" >
+      <a href="/properties/<%=p._id%>">
+        <section > 
+          <% if(p.images.length > 0) { %>
+            <img id="propImg" src="<%= p.images[0].url %>">
+          <% } %>
+        </section>
+      </a>
+    </div>
+  <% }) %>
 </div>
 
