@@ -1,5 +1,5 @@
 # Partmint :herb:
-
+	Developed By: Mihir Naik, Chase Morris and Chakrit Prasatwattana
 ## Table of Contents
 
 - Purpose
@@ -46,6 +46,7 @@ Node.js: allows us to runs javascript not in the browser. Implemented Node Modul
 	 Passport
 	 Dotenv
 	 Connect-MongoDB-Session
+	 Sweetalert
 
 MongoDb: A database to store information about the Property Owner, Resident and Property.
 
@@ -56,7 +57,8 @@ Stripe: a payment API so residents can make payments for their rent
 
 ### Unsolved Problems 
 ---
- I am not sure yet.
+ Currently the team have not implemented complete security functions to Partmint. In 
+	in addition there are still design elements that need to changed to create a better user expereince. 
 
 ### How to Use
 ---
