@@ -1,3 +1,4 @@
+<div id="middle" class="col-sm-4 col-sm-offset-4" style="margin-top:30px;">
 <h1>Edit User Profile</h1>
 
 <form method="post" action="/users/<%= user.id%>?_method=PATCH">
@@ -17,5 +18,6 @@
     <label for="telephone">Telephone</label>
     <input type="tel" class="form-control" name="telephone" id="telephone" aria-describedby="emailHelp" placeholder="Telephone" value="<%= user.telephone %>">
   </div>
-  <button type="submit" class="btn btn-primary">Submit Changes</button>
+  <button type="submit" class="btn btn-partmint">Submit Changes</button>
 </form>
+</div>
