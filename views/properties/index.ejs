@@ -3,7 +3,7 @@
   <% properties.forEach(function(p){ %>
     <div class="item" >
       <a href="/properties/<%=p._id%>">
-        <section > 
+        <section> 
           <% if(p.images.length > 0) { %>
             <img id="propImg" src="<%= p.images[0].url %>">
           <% } %>

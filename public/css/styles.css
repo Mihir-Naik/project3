@@ -6,6 +6,7 @@
   column-gap: 1.5em;
   font-size: .85em;
   float: left;
+  width: 90%;
 }
 
 #middle {
@@ -62,7 +63,14 @@
   max-width:100%;
   max-height:100%;
   padding: 1em;
-  box-shadow: 0px 2px 4px 0 #413C58;
+  box-sizing: border-box;
+  border: 1px solid black;
+  box-shadow: 0px 2px 1px 0 #413C58;
+  margin: 8px;
+}
+
+#propImg:hover {
+  border-color: #ccc;
 }
 
 #newResident {
