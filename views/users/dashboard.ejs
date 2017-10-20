@@ -3,7 +3,6 @@
 <% if(currentUser.residence) { %>
   <h2>I am a resident</h2>
 <% } else { %>
-  <h2>I am a property owner</h2>
   <% if(!_.isEmpty(properties)) { %>
     <% properties.forEach(function(property) {%>
       <div>

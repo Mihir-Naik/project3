@@ -46,11 +46,12 @@ module.exports = {
   },
   
   myInvoices: (req, res) => {
-    Property.find({resident: req.user._id}).populate('resident owner invoices').exec((req, property)=> {
-      if (property[0].invoices[0]){
-        res.render('invoices/index', {property: property[0]})
+    Property.find({resident: req.user._id}).populate('resident owner invoices').exec((err, properties)=> {
+      if(properties.invoices){
+        res.render('invoices/index', {property: properties[0]})
       } else {
-        res.render('/dashboard', req.flash('error', "There are no invoices to show at this time !"))
+        req.flash('error', "There are no invoices to show at this time !")
+        res.redirect('/dashboard')
       }
     })
   },

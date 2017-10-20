@@ -105,15 +105,16 @@
 
 body{
   font-family:  'Raleway', sans-serif;
+  color: #413C58;
 }
 
 #carousel{
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   margin: auto; 
   margin-top: 150px;
-  margin-bottom: 250px;
+  margin-bottom: 50px;
 }
 
 .carousel-inner img {
@@ -142,3 +143,42 @@ body{
 .row{
   margin-top: 10px;
 }
+
+.btn.btn-partmint {
+  background: #99ffbb;
+  color: black;
+}
+
+.btn.btn-partmint:hover {
+  background: #3bf576;
+}
+
+.btn.btn-addmint{
+  background: #413C58;
+  color: white;
+  
+}
+
+.btn.btn-addmint:hover{
+  background: rgb(123, 100, 238);
+}
+
+.btn.btn-deletemint{
+  background-color: red;
+  color: white;
+  
+}
+
+.btn.btn-deletemint:hover{
+  background-color: rgb(191, 31, 31);
+ 
+}
+
+.text-partmint {
+  color:#413C58;
+  
+}
+
+
+
+
