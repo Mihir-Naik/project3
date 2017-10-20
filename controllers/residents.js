@@ -12,7 +12,11 @@ module.exports = {
     newResident.password = newResident.generateHash(newResident.password)
     newResident.residence = req.params.propertyId
     newResident.save((err, resident) => {
-      if(err) return console.log(err)
+      if(err) {
+        console.log(err)
+        req.flash('error', 'Please input the information completely')
+        return res.render(`/properties/${req.params.propertyId}/residents/new`)
+      }
       Property.findById(req.params.propertyId, (err, property) => {
         if(err) return console.log(err)
         property.resident = resident._id

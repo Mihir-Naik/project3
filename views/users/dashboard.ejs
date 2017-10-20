@@ -1,24 +1,47 @@
 <h1 style="margin-top:100px;">Dashboard</h1>
 
 <% if(currentUser.residence) { %>
-  <h2>I am a resident</h2>
+  <h3>My Home</h3>
+  <a href="/properties/<%= user.residence.id%>">
+    <% if(user.residence.images.length > 0) { %>
+      <img src="<%= user.residence.images[0].url%>"/><br />
+    <% } %>
+    <%= user.residence.formattedAddress() %>
+  </a>
+  <br />
+  <br />
+  <h3 style="display: inline">Chat with Owner</h3>
+
+  <a class="chat-icon" href="/conversations/<%= user.conversation %>">
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-weixin fa-stack-1x fa-inverse"></i>
+    </span>
+  </a>
+  <hr />
 <% } else { %>
-  <h2>I am a property owner</h2>
   <% if(!_.isEmpty(properties)) { %>
     <% properties.forEach(function(property) {%>
       <div>
         <a href="/properties/<%= property._id %>">
           <div class="">
+            <% if(property.images.length > 0) { %>
+              <img src="<%= property.images[0].url %>" style="height: 200px">
+            <% } %>
             <p><%= property.street %> - <%= property.numBedrooms %> Bedrooms - <%= property.numBathrooms %> Bathrooms <%= property.vacant? '(Vacant)' : '' %></p>
           </div>
         </a>
         <% if (!property.vacant) {%>
           <h3>Invoices:</h3>
-          <ul>
-            <% property.invoices.forEach(function(invoice) { %>
-              <li><a href="/properties/<%= property.id%>/invoices/<%= invoice.id %>">Billed To: <%= property.resident.firstName %> <%= property.resident.lastName %> <br> Amount: $<%= invoice.amount %></a> </li>
-            <% }) %>
-          </ul>
+          <% if(property.invoices.length > 0) { %>
+            <ul>
+              <% property.invoices.forEach(function(invoice) { %>
+                <li><a href="/properties/<%= property.id%>/invoices/<%= invoice.id %>">Billed To: <%= property.resident.firstName %> <%= property.resident.lastName %> <br> Amount: $<%= invoice.amount %></a> </li>
+              <% }) %>
+            </ul>
+          <% } else { %>
+            <p>There are no invoices to display</p>
+          <% } %>
         <% } else { %>
           <h3>Inquiries:</h3>
           <ul>

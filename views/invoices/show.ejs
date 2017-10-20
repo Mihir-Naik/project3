@@ -1,28 +1,33 @@
-<h1>Show page for an invoice</h1>
+<h1 style="margin-top: 100px">Invoice</h1>
 
-<div>
-  <h2>Bill From:</h2>
-  <h4><%= invoice.billFrom.firstName %> <%= invoice.billFrom.lastName %></h4>
-</div>
-<div>
-  <h2>Bill To:</h2>
-  <h4><%= invoice.billTo.firstName %> <%= invoice.billTo.lastName %></h4>
-</div>
-<div>
-  <h4>Invoice for: <br><%= property.aptNumber%>, <%= property.street%>, <%= property.city%>, <%= property.state%>, <%= property.zipCode%></h4>
-</div>
-<div>
-  <h4>Amount Due ($): <br><%= invoice.amount%></h4>
-</div>
-<div>
-  <h4>Description: <br><%= invoice.description%></h4>    
-</div>
-<div>
-  <h4>Paid: <br><%= invoice.paid%></h4>    
-</div>
+<dl style="font-size: 1.25em">
+  <dt>Bill From:</dt>
+  <dd><%= invoice.billFrom.firstName %> <%= invoice.billFrom.lastName %></dd>
+
+  <dt>Bill To:</dt>
+  <dd><%= invoice.billTo.firstName %> <%= invoice.billTo.lastName %> (<%= invoice.billTo.email %>)</dd>
+
+  <dt>Invoice for:</dt>
+  <dd><%= property.aptNumber%>, <%= property.street%>, <%= property.city%>, <%= property.state%>, <%= property.zipCode%></dd>
+
+  <dt>Amount Due:</dt>
+  <dd>$<%= invoice.amount%></dd>
+
+  <dt>Description: </dt>
+  <dd><%= invoice.description%></dd>    
+
+  <dt>Paid:</dt>
+  <dd>
+    <% if(invoice.paid) { %>
+      <span class="badge badge-success">Paid</span>
+    <% } else { %>
+      <span class="badge badge-danger">Not Paid</span>
+    <% }  %>
+  </dd>
+</dl>
 
 <% if(currentUser.id == invoice.billFrom.id) { %> <!-- if the current user is the person who issued the invoice -->
-  <a href="/properties/<%=property._id%>/invoices/<%= invoice._id%>/edit">Edit this invoice</a>
+  <a class="btn btn-partmint" href="/properties/<%=property._id%>/invoices/<%= invoice._id%>/edit">Edit this invoice</a>
 <% } else {%>
   <% if (!invoice.paid) {%>
     <form action="/charge?invoiceId=<%= invoice._id%>" method="post">

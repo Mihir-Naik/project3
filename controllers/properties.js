@@ -30,7 +30,10 @@ module.exports = {
     })
 
     newProperty.save((err, property) => {
-      if(err) return console.log(err)
+      if(err) {
+        req.flash('error', 'Please make sure all the fields are filled in correctly')
+        return res.redirect('/properties/new')
+      }
       var currentUser = req.user
       currentUser.ownedProperties.push(property._id)
       currentUser.save((err) => {

@@ -11,7 +11,9 @@ module.exports = {
     })
   },
   new: (req,res) => {
-    res.render('invoices/new', {propertyId: req.params.propertyId})
+    Property.findById(req.params.propertyId, (err, property) => {
+      res.render('invoices/new', { property })
+    })
   },
   create: (req,res) => {
     var newInvoice = new Invoice(req.body)
