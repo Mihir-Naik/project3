@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #413C58;">
-    <a class="navbar-brand" href="/" style="color:white;">Partmint 🌿</a>
+    <a class="navbar-brand" href="/">Partmint 🌿</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,11 +9,11 @@
       <ul class="navbar-nav mr-auto">
         <% if(loggedIn) { %>
         <li class="nav-item">
-          <a class="nav-link" href="/dashboard" style="color:white;">Dashboard <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
         </li>
         <% } %>
         <li class="nav-item">
-          <a class="nav-link" href="/properties" style="color:white;">All Properties</a>
+          <a class="nav-link" href="/properties">All Properties</a>
         </li>
       </ul>
       <ul class="navbar-nav">
@@ -27,14 +27,14 @@
             </a>
           <% } %>
           <% if(!currentUser.residence) { /* the current user is a property owner */ %>
-            <a class="nav-link" href="/my_residents" style="color:white;">My Residents</a>
-            <a class="nav-link" href="/properties/new" style="color:white;">Add New Property</a>
+            <a class="nav-link" href="/my_residents">My Residents</a>
+            <a class="nav-link" href="/properties/new">Add New Property</a>
           <% } %>
           <% if(currentUser.residence) { %>
-            <a href="/my_invoices" class="nav-link" style="color:white;"> My Invoices </a>
+            <a href="/my_invoices" class="nav-link"> My Invoices </a>
           <% } %>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= currentUser.firstName + " " + currentUser.lastName %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -43,8 +43,8 @@
             </div>
           </li>
         <% } else {%>
-          <a class="nav-link" href="/login" style="color:white;">Log In</a>
-          <a class="nav-link" href="/signup" style="color:white;">Sign Up</a>
+          <a class="nav-link" href="/login">Log In</a>
+          <a class="nav-link" href="/signup">Sign Up</a>
         <% } %>
       </ul>
     </div>

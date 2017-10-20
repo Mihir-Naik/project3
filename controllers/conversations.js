@@ -13,7 +13,6 @@ module.exports = {
     })
   },
   createMessage: (req, res) => {
-    console.log(req.body)
     Conversation.findById(req.body.conversationId, (err, conversation) => {
       if(err) return console.log(err)
       var newMessage = {
@@ -31,7 +30,6 @@ module.exports = {
 
       conversation.messages.push(newMessage)
       conversation.save((err, conversation) => {
-        console.log(conversation)
         if(err) {
           return console.log(err)
           res.json('error')
