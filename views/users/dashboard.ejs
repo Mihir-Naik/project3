@@ -44,11 +44,15 @@
           <% } %>
         <% } else { %>
           <h3>Inquiries:</h3>
-          <ul>
-            <% property.inquiries.forEach(function(inquiry) { %>
-              <li><a href="/properties/<%= property.id%>/inquiries/<%= inquiry.id %>">Name: <%= inquiry.firstName %>, Email: <%= inquiry.email %></a> </li>
-            <% }) %>
-          </ul>
+          <% if(property.inquiries.length > 0) { %>
+            <ul>
+              <% property.inquiries.forEach(function(inquiry) { %>
+                <li><a href="/properties/<%= property.id%>/inquiries/<%= inquiry.id %>">Name: <%= inquiry.firstName %>, Email: <%= inquiry.email %></a> </li>
+              <% }) %>
+            </ul>
+          <% } else { %>
+            <p>There are no inquiries for this property</p>
+          <% } %>
         <% } %>
         <hr />
       </div>
