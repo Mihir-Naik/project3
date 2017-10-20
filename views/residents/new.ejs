@@ -1,6 +1,7 @@
-<h1>Add A New Resident</h1>
 
-<div class="col-sm-6 col-sm-offset-3">
+
+<div id="newResident" class="col-sm-4 col-sm-offset-4" style="margin-top:100px;">
+    <h1>Add A New Resident</h1>
   <form action="/properties/<%= propertyId %>/residents" method="post">
     <div class="form-group">
       <label>First Name</label>
@@ -22,6 +23,6 @@
       <label>Password</label>
       <input type="password" class="form-control" name="password">
     </div>
-    <button type="submit" class="btn btn-warning btn-lg">Create Resident</button>
+    <button id="submitResident" type="submit" class="btn btn-lg" style="background-color:#99ffbb;">Create Resident</button>
   </form>
 </div>

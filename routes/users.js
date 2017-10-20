@@ -39,6 +39,7 @@ userRouter.get('/dashboard', isLoggedIn, usersCtrl.dashboard)
 
 userRouter.get('/profile', isLoggedIn, usersCtrl.show)
 userRouter.get('/my_residents', isLoggedIn, usersCtrl.myResidents)
+userRouter.get('/my_invoices', isLoggedIn, usersCtrl.myInvoices)
 
 userRouter.route('/users/:id')
   .patch(usersCtrl.update)

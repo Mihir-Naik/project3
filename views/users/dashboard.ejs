@@ -1,4 +1,4 @@
-<h1>Dashboard</h1>
+<h1 style="margin-top:100px;">Dashboard</h1>
 
 <% if(currentUser.residence) { %>
   <h2>I am a resident</h2>
@@ -6,7 +6,6 @@
   <h2>I am a property owner</h2>
   <% if(!_.isEmpty(properties)) { %>
     <% properties.forEach(function(property) {%>
-      <hr />
       <div>
         <a href="/properties/<%= property._id %>">
           <div class="">
@@ -17,9 +16,9 @@
         <ul>
           <% property.inquiries.forEach(function(inquiry) { %>
             <li><a href="/properties/<%= property.id%>/inquiries/<%= inquiry.id %>">Name: <%= inquiry.firstName %>, Email: <%= inquiry.email %></a> </li>
-          <% }) %>
-        </ul>
-        
+            <% }) %>
+          </ul>
+          <hr />
       </div>
       <% }) %>
   <% } else { %>

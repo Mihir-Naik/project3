@@ -1,9 +1,15 @@
-<div class="row">
-  <div class="property-info col-md-6">
+<div class="row" style="margin-top:100px;">
+  <div class="property-info col-md-6" >
     <h1><%= `${property.aptNumber}, ${property.street}, ${property.city}, ${property.state} ${property.zipCode}` %></h1>
     <dl>
       <dt>Owner</dt>
       <dd><%= property.owner.firstName + " " + property.owner.lastName  %></dd>
+
+      <% if(!property.vacant) { %>
+        <dt>Resident</dt>
+        <dd><%= property.resident.firstName + " " + property.resident.lastName  %></dd>
+      <% } %>
+
 
       <dt>Rental Price</dt>
       <dd><%= property.rentalPrice %></dd>
@@ -16,9 +22,6 @@
 
       <dt>Size</dt>
       <dd><%= property.sizeSquareFeet %> sq ft.</dd>
-
-      <dt>Vacant</dt>
-      <dd><%= property.vacant %></dd>
       
       <dt>Description</dt>
       <dd><%= property.description %></dd>
@@ -50,16 +53,22 @@
 </div>
 
 <% if(loggedIn && currentUser.id == property.owner.id) {%>
+  <% if(!property.vacant) { %>
+  <a href="/properties/<%= property._id %>/invoices/new">Add invoice</a>
+  <% } %>
+  <% if (property.invoices[0]) { %>
+    <a href="/properties/<%= property._id %>/invoices">Show invoices</a>
+  <% } %>
   <% if(property.vacant) { %>
     <a href="/properties/<%= property._id %>/residents/new">Add a Resident</a>
   <% } %>
-  <a href="/properties/<%= property._id %>/edit">Edit</a>
-  <a id="delete" href='/properties/<%= property._id %>?_method=DELETE'>Delete</a>
+  <a href="/properties/<%= property._id %>/edit">Edit Property</a>
+  <a id="delete" href='/properties/<%= property._id %>?_method=DELETE'>Delete Property</a>
 <% } %>
 
 <!-- Owners cannot apply for their own property -->
 <% if(!loggedIn || (currentUser.id != property.owner.id)) { %>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">Apply</button>
+  <button type="button" class="btn " data-toggle="modal" data-target="#applyModal" style="background-color:#99ffbb;">Apply</button>
 <% } %>
 
 <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -95,7 +104,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+            <button type="submit" class="btn" id="submit" style="background-color: #99ffbb;">Submit</button>
           </div>
         </form>
       </div>
@@ -113,6 +122,3 @@
     }
   })
 </script>
-
-<a href="/properties/<%= property._id %>/invoices/new">Add invoice</a>
-<a href="/properties/<%= property._id %>/invoices">Show invoices</a>
